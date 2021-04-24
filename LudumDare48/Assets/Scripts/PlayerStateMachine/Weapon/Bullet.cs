@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class Bullet : MonoBehaviour, IPooledObject {
     private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private Vector3 scale;
 
     public float Speed { private get; set; }
     public Vector2 Direction { private get; set; }
@@ -17,15 +18,17 @@ public class Bullet : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        scale = transform.localScale;
     }
 
-    private void Start() {
+    public void OnObjectSpawn() {
         StartCoroutine(DestroyBullet());
     }
 
     public void Shoot() {
         sr.flipX = (Direction.x < 0);
         rb.velocity = Direction * (Speed + Mathf.Abs(Player.Instance.CurrentVelocity.x));
+        // transform.localScale = Vector3.one;
     }
 
     private void FixedUpdate() {
@@ -34,7 +37,8 @@ public class Bullet : MonoBehaviour {
 
     IEnumerator DestroyBullet() {
         yield return new WaitForSeconds(DestroyDelay);
-        Destroy(this.gameObject, 0.1f);
+        // Destroy(this.gameObject, 0.1f);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -42,11 +46,14 @@ public class Bullet : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        Destroy(this.gameObject, 0.1f);
+        gameObject.SetActive(false);
     }
 
     private void Accelerate() {
-        Speed *= 1.01f;
+        rb.velocity *= 1.01f;
+        // scale.x = transform.localScale.x * 1.01f;
+        // scale.y = transform.localScale.y * 1.01f;
+        // transform.localScale = scale;
     }
 }
 

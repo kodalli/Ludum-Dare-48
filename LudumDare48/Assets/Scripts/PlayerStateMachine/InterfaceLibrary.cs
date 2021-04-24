@@ -1,4 +1,7 @@
 public interface IDamageable {
-    public void TakeDamage(float damage);
+    void TakeDamage(float damage);
 }
 
+public interface IPooledObject {
+    void OnObjectSpawn();
+}

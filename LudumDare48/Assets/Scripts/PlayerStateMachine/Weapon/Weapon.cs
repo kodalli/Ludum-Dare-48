@@ -17,7 +17,8 @@ public class Weapon : MonoBehaviour {
     }
 
     public void ShootBullet() {
-        GameObject bullet = Instantiate((GameObject)Resources.Load("Bullet"), bulletShootPosition.position, Quaternion.identity);
+        // GameObject bullet = Instantiate((GameObject)Resources.Load("Bullet"), bulletShootPosition.position, Quaternion.identity);
+        GameObject bullet = ObjectPooler.Instance.SpawnFromPool("Bullet", bulletShootPosition.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Damage = weaponData.bulletDamage;
         bullet.GetComponent<Bullet>().Speed = weaponData.bulletSpeed;
         bullet.GetComponent<Bullet>().Direction = Player.Instance.FacingDirection == 1 ? Vector2.right : Vector2.left;
