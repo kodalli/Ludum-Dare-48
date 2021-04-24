@@ -25,7 +25,6 @@ public class PlayerState {
     public virtual void Enter() {
         DoChecks();
         player.Anim.SetBool(animBoolName, true);
-        Debug.Log(animBoolName);
         startTime = Time.time;
         isAnimationFinished = false;
         isExitingState = false;

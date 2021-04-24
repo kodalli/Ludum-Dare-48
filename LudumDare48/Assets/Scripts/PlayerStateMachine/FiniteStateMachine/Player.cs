@@ -34,6 +34,7 @@ public class Player : MonoBehaviour {
 
     #endregion
 
+    #region Unity Callback Functions
     private void Awake() {
         StateMachine = new PlayerStateMachine();
 
@@ -56,8 +57,14 @@ public class Player : MonoBehaviour {
     private void FixedUpdate() {
         StateMachine.CurrentState.PhysicsUpdate();
     }
+
+    #endregion
+
+    #region Animation Triggers
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+
+    #endregion
 
     public bool CheckIfGrounded() => Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
     public bool CheckIfTouchingWall() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
@@ -78,8 +85,6 @@ public class Player : MonoBehaviour {
         var scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
-        // transform.Rotate(0.0f, 180.0f, 0.0f);
-        // SR.flipX = FacingDirection != 1;
     }
 
 
