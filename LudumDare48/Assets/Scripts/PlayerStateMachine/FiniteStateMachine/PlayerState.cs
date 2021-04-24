@@ -40,13 +40,13 @@ public class PlayerState {
 
         if (player.InputHandler.AttackInputs[(int)CombatInputs.PRIMARY]) {
             // stateMachine.ChangeState(player.PrimaryAttackState);
-            if (countDown < 0.1f) {
+            if (countDown <= 0) {
                 countDown = 1f / player.weapon.FireRate;
                 player.weapon.ShootBullet();
             }
         }
 
-        if (countDown > 0) countDown -= Time.deltaTime;
+        if (countDown >= 0) countDown -= Time.deltaTime;
     }
     public virtual void PhysicsUpdate() {
         DoChecks();
