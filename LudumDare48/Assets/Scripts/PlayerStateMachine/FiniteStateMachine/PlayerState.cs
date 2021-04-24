@@ -29,8 +29,16 @@ public class PlayerState {
         isAnimationFinished = false;
         isExitingState = false;
     }
+    public virtual void Enter(bool? x) {
+        DoChecks();
+        startTime = Time.time;
+        isExitingState = false;
+    }
     public virtual void Exit() {
         player.Anim.SetBool(animBoolName, false);
+        isExitingState = true;
+    }
+    public virtual void Exit(bool? x) {
         isExitingState = true;
     }
     public virtual void LogicUpdate() { }

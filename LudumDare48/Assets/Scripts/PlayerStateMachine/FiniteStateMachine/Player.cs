@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : Singleton<Player> {
 
     #region State Variables 
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
-
+    public PlayerAttackState PrimaryAttackState { get; private set; }
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private Weapon weapon;
 
     #endregion
 
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour {
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
         MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
+        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "shoot");
     }
     private void Start() {
         Anim = GetComponent<Animator>();
@@ -48,6 +50,8 @@ public class Player : MonoBehaviour {
         SR = GetComponent<SpriteRenderer>();
 
         FacingDirection = 1;
+
+        PrimaryAttackState.SetWeapon(weapon);
 
         StateMachine.Initialize(IdleState);
     }

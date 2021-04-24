@@ -28,6 +28,10 @@ public class PlayerGroundedState : PlayerState {
         base.LogicUpdate();
 
         xInput = player.InputHandler.NormInputX;
+
+        if (player.InputHandler.AttackInputs[(int)CombatInputs.PRIMARY]) {
+            stateMachine.ChangeState(player.PrimaryAttackState);
+        }
     }
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
