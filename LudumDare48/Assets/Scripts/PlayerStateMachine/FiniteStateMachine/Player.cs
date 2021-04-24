@@ -9,7 +9,8 @@ public class Player : Singleton<Player> {
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     [SerializeField] private PlayerData playerData;
-    public Weapon weapon;
+    [SerializeField] private Weapon weapon;
+    private float countDown;
 
     #endregion
 
@@ -52,7 +53,9 @@ public class Player : Singleton<Player> {
         StateMachine.Initialize(IdleState);
     }
     private void Update() {
+        Shoot();
         StateMachine.CurrentState.LogicUpdate();
+
     }
     private void FixedUpdate() {
         StateMachine.CurrentState.PhysicsUpdate();
@@ -85,6 +88,18 @@ public class Player : Singleton<Player> {
         var scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    private void Shoot() {
+        if (InputHandler.AttackInputs[(int)CombatInputs.PRIMARY]) {
+            // stateMachine.ChangeState(player.PrimaryAttackState);
+            if (countDown <= 0) {
+                countDown = 1f / weapon.FireRate;
+                weapon.ShootBullet();
+            }
+        }
+
+        if (countDown >= 0) countDown -= Time.deltaTime;
     }
 
 

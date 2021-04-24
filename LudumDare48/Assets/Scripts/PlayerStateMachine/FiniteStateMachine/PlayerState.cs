@@ -15,8 +15,8 @@ public class PlayerState {
     public float StartTime { get => startTime; }
 
     private int animBoolName;
-    private Weapon weapon;
-    private float countDown;
+    // private Weapon weapon;
+    // private float countDown;
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) {
         this.player = player;
@@ -38,15 +38,7 @@ public class PlayerState {
 
     public virtual void LogicUpdate() {
 
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.PRIMARY]) {
-            // stateMachine.ChangeState(player.PrimaryAttackState);
-            if (countDown <= 0) {
-                countDown = 1f / player.weapon.FireRate;
-                player.weapon.ShootBullet();
-            }
-        }
 
-        if (countDown >= 0) countDown -= Time.deltaTime;
     }
     public virtual void PhysicsUpdate() {
         DoChecks();
