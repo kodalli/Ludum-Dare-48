@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour {
-    private PlayerAttackState state;
+    private PlayerState state;
     private float timeSinceFirstAttack;
     [SerializeField] private SO_WeaponData weaponData;
     [SerializeField] private Transform bulletShootPosition;
-    public float FireRate { get { return weaponData.fireRate; } }
+    public float FireRate { get => weaponData.fireRate; }
     private void Start() {
 
     }
@@ -25,6 +25,6 @@ public class Weapon : MonoBehaviour {
         bullet.GetComponent<Bullet>().Shoot();
     }
 
-    public void InitializeWeapon(PlayerAttackState state) => this.state = state;
+    public void InitializeWeapon(PlayerState state) => this.state = state;
 
 }

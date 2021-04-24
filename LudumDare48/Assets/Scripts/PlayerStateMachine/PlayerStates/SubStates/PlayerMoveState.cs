@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState {
+
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
     }
 
@@ -12,6 +13,7 @@ public class PlayerMoveState : PlayerGroundedState {
 
     public override void Enter() {
         base.Enter();
+
     }
     public override void Exit() {
         base.Exit();

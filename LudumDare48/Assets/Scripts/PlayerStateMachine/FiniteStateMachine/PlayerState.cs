@@ -12,15 +12,17 @@ public class PlayerState {
     protected bool isExitingState;
 
     protected float startTime;
-    public float StartTime { get { return startTime; } }
+    public float StartTime { get => startTime; }
 
-    private string animBoolName;
+    private int animBoolName;
+    private Weapon weapon;
+    private float countDown;
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) {
         this.player = player;
         this.stateMachine = stateMachine;
         this.playerData = playerData;
-        this.animBoolName = animBoolName;
+        this.animBoolName = Animator.StringToHash(animBoolName);
     }
     public virtual void Enter() {
         DoChecks();
@@ -29,19 +31,23 @@ public class PlayerState {
         isAnimationFinished = false;
         isExitingState = false;
     }
-    public virtual void Enter(bool? x) {
-        DoChecks();
-        startTime = Time.time;
-        isExitingState = false;
-    }
     public virtual void Exit() {
         player.Anim.SetBool(animBoolName, false);
         isExitingState = true;
     }
-    public virtual void Exit(bool? x) {
-        isExitingState = true;
+
+    public virtual void LogicUpdate() {
+
+        if (player.InputHandler.AttackInputs[(int)CombatInputs.PRIMARY]) {
+            // stateMachine.ChangeState(player.PrimaryAttackState);
+            if (countDown < 0.1f) {
+                countDown = 1f / player.weapon.FireRate;
+                player.weapon.ShootBullet();
+            }
+        }
+
+        if (countDown > 0) countDown -= Time.deltaTime;
     }
-    public virtual void LogicUpdate() { }
     public virtual void PhysicsUpdate() {
         DoChecks();
     }

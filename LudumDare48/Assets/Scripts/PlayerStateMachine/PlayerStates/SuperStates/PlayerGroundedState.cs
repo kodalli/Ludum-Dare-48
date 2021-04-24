@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerGroundedState : PlayerState {
 
     protected int xInput;
-
     private bool isGrounded;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
@@ -29,9 +28,6 @@ public class PlayerGroundedState : PlayerState {
 
         xInput = player.InputHandler.NormInputX;
 
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.PRIMARY]) {
-            stateMachine.ChangeState(player.PrimaryAttackState);
-        }
     }
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
@@ -43,4 +39,5 @@ public class PlayerGroundedState : PlayerState {
     public override void AnimationTrigger() {
         base.AnimationTrigger();
     }
+
 }

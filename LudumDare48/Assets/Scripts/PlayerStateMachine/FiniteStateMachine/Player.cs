@@ -8,9 +8,8 @@ public class Player : Singleton<Player> {
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
-    public PlayerAttackState PrimaryAttackState { get; private set; }
     [SerializeField] private PlayerData playerData;
-    [SerializeField] private Weapon weapon;
+    public Weapon weapon;
 
     #endregion
 
@@ -41,7 +40,6 @@ public class Player : Singleton<Player> {
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
         MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
-        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "shoot");
     }
     private void Start() {
         Anim = GetComponent<Animator>();
@@ -50,8 +48,6 @@ public class Player : Singleton<Player> {
         SR = GetComponent<SpriteRenderer>();
 
         FacingDirection = 1;
-
-        PrimaryAttackState.SetWeapon(weapon);
 
         StateMachine.Initialize(IdleState);
     }

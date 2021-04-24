@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour {
 
     public void Shoot() {
         sr.flipX = (Direction.x < 0);
-        rb.velocity = Direction * Speed;
+        rb.velocity = Direction * (Speed + Mathf.Abs(Player.Instance.CurrentVelocity.x));
     }
 
     private void FixedUpdate() {

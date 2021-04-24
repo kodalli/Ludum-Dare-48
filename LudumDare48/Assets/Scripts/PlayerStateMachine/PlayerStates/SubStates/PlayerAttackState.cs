@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerAttackState : PlayerAbilityState {
     private Weapon weapon;
     private float countDown;
+    private int mshoot = Animator.StringToHash("mshoot");
     public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
     }
 
     public override void Enter() {
         base.Enter();
-        if (countDown < 0.1f) {
+        // player.Anim.SetBool(previousAnimBoolName, true);
+        if (countDown < 0f) {
             countDown = 1f / weapon.FireRate;
             weapon.ShootBullet();
         }
@@ -21,8 +23,12 @@ public class PlayerAttackState : PlayerAbilityState {
         this.weapon = weapon;
         weapon.InitializeWeapon(this);
     }
+
     public override void LogicUpdate() {
         base.LogicUpdate();
-        if (countDown > 0) countDown -= Time.deltaTime;
+        // player.Anim.SetBool(previousAnimBoolName, false);
+        if (countDown > 0f) countDown -= Time.deltaTime;
+
     }
+
 }
