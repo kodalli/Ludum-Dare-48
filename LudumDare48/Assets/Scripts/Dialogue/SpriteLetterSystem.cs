@@ -77,6 +77,8 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     /// </summary>
     /// <param name="textToGenerate"></param>
     public void GenerateSpriteText(string textToGenerate) {
+        textToGenerate = textToGenerate.ToLower();
+
         if (letterObject == null) return;
 
         // The sprite text generator object should be place at the top left corner of the text box
