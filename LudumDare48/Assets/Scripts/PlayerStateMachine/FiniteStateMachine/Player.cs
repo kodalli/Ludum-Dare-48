@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Singleton<Player> {
+public class Player : Singleton<Player>, IDamageable {
+
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float maxHealth;
 
     #region State Variables 
     public PlayerStateMachine StateMachine { get; private set; }
@@ -10,7 +13,6 @@ public class Player : Singleton<Player> {
     public PlayerMoveState MoveState { get; private set; }
     [SerializeField] private PlayerData playerData;
     [SerializeField] private Weapon weapon;
-    private float countDown;
 
     #endregion
 
@@ -32,6 +34,7 @@ public class Player : Singleton<Player> {
     private Vector2 previousVelocity;
     public Vector2 CurrentVelocity { get; private set; }
     public int FacingDirection { get; private set; }
+    private float countDown;
 
     #endregion
 
@@ -49,6 +52,8 @@ public class Player : Singleton<Player> {
         SR = GetComponent<SpriteRenderer>();
 
         FacingDirection = 1;
+
+        currentHealth = maxHealth;
 
         StateMachine.Initialize(IdleState);
     }
@@ -102,5 +107,14 @@ public class Player : Singleton<Player> {
         if (countDown >= 0) countDown -= Time.deltaTime;
     }
 
+    public void TakeDamage(float damage) {
 
+        Debug.Log(damage);
+
+        currentHealth -= (int)damage;
+
+        if (currentHealth <= 0) {
+            Destroy(this.gameObject, 0.1f);
+        }
+    }
 }

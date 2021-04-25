@@ -9,4 +9,10 @@ public class SO_WeaponData : ScriptableObject {
     public float bulletSpeed = 5f;
     public Vector2 bulletDirection = Vector2.right;
     public float bulletDestroyDelay = 2f;
+
+    public float rockDamage = 1f;
+    public float rockFireRate = 5f;
+    public float rockSpeed = 5f;
+    public Vector2 rockDirection = Vector2.right;
+    public float rockDestroyDelay = 2f;
 }

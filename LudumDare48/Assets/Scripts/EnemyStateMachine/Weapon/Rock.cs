@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Rock : MonoBehaviour, IPooledObject {
-    private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Vector3 scale;
@@ -13,11 +12,12 @@ public class Rock : MonoBehaviour, IPooledObject {
     public float Damage { private get; set; }
     public float DestroyDelay { private get; set; }
 
+
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
         scale = transform.localScale;
+
     }
 
     public void OnObjectSpawn() {
@@ -26,7 +26,7 @@ public class Rock : MonoBehaviour, IPooledObject {
 
     public void Shoot() {
         sr.flipX = (Direction.x < 0);
-        rb.velocity = Direction * (Speed + Mathf.Abs(Player.Instance.CurrentVelocity.x));
+        rb.velocity = Direction * Speed;
         transform.localScale = Vector3.one;
     }
 
@@ -41,18 +41,17 @@ public class Rock : MonoBehaviour, IPooledObject {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        other.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(Damage);
-        // gameObject.SetActive(false);
+        other.gameObject.GetComponent<IDamageable>()?.TakeDamage(Damage);
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+
         gameObject.SetActive(false);
     }
 
     private void Accelerate() {
         rb.velocity *= 1.01f;
-        scale.x = transform.localScale.x * 1.01f;
-        scale.y = transform.localScale.y * 1.01f;
         transform.localScale = scale;
     }
 }
