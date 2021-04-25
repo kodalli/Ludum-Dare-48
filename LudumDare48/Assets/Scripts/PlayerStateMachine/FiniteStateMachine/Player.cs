@@ -67,6 +67,8 @@ public class Player : Singleton<Player>, IDamageable {
         StateMachine.Initialize(IdleState);
     }
     private void Update() {
+
+        CurrentVelocity = RB.velocity;
         Shoot();
         StateMachine.CurrentState.LogicUpdate();
 
