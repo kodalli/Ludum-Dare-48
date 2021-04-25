@@ -6,6 +6,9 @@ public class Player : Singleton<Player>, IDamageable {
 
     [SerializeField] private float currentHealth;
     [SerializeField] private float maxHealth;
+    [SerializeField] private float currentOxygen;
+    [SerializeField] private float maxOxygen;
+    [SerializeField] private float oxygenUsageRate;
 
     #region State Variables 
     public PlayerStateMachine StateMachine { get; private set; }
@@ -39,8 +42,12 @@ public class Player : Singleton<Player>, IDamageable {
     private Vector2 previousVelocity;
     public Vector2 CurrentVelocity { get; private set; }
     public int FacingDirection { get; private set; }
+    public float MaxHP { get => maxHealth; }
+    public float MaxOxygen { get => maxOxygen; }
+    public float CurrentHP { get => currentHealth; }
+    public float CurrentOxygen { get => currentOxygen; }
     private float countDown;
-
+    private float oxygenCountDown;
     #endregion
 
     #region Unity Callback Functions
@@ -63,10 +70,20 @@ public class Player : Singleton<Player>, IDamageable {
         FacingDirection = 1;
 
         currentHealth = maxHealth;
+        currentOxygen = maxOxygen;
+
+        HUD.Instance.SetHPHUD();
+        HUD.Instance.SetOxgyenHUD();
+
 
         StateMachine.Initialize(IdleState);
     }
     private void Update() {
+
+        LocalSave.Instance.saveData.oxygen = currentOxygen;
+        LocalSave.Instance.saveData.health = currentHealth;
+
+        ConsumeOxygen();
 
         CurrentVelocity = RB.velocity;
         Shoot();
@@ -119,6 +136,8 @@ public class Player : Singleton<Player>, IDamageable {
             if (countDown <= 0) {
                 countDown = 1f / weapon.FireRate;
                 weapon.ShootBullet();
+                currentOxygen--;
+                HUD.Instance.SetOxgyenHUD();
             }
         }
 
@@ -131,8 +150,21 @@ public class Player : Singleton<Player>, IDamageable {
 
         currentHealth -= (int)damage;
 
+        HUD.Instance.SetHPHUD();
+
         if (currentHealth <= 0) {
             Destroy(this.gameObject, 0.1f);
         }
+    }
+
+    private void ConsumeOxygen() {
+
+        if (oxygenCountDown <= 0) {
+            oxygenCountDown = oxygenUsageRate;
+            currentOxygen--;
+            HUD.Instance.SetOxgyenHUD();
+        }
+
+        if (oxygenCountDown >= 0) oxygenCountDown -= Time.deltaTime;
     }
 }

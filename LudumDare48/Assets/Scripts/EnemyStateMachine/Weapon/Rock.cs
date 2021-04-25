@@ -27,7 +27,7 @@ public class Rock : MonoBehaviour, IPooledObject {
     public void Shoot() {
         sr.flipX = (Direction.x < 0);
         rb.velocity = Direction * Speed;
-        transform.localScale = Vector3.one;
+        transform.localScale = Vector3.one * 1.5f;
     }
 
     private void FixedUpdate() {
@@ -52,6 +52,6 @@ public class Rock : MonoBehaviour, IPooledObject {
 
     private void Accelerate() {
         rb.velocity *= 1.01f;
-        transform.localScale = scale;
+        // transform.localScale = scale;
     }
 }

@@ -6,10 +6,11 @@ using System;
 
 [Serializable]
 public class PlayerResources {
-    public int oxygen;
+    public float oxygen;
+    public float health;
     public int gems; // trade in to pay off debt or purchase upgrade
     public int upgrades;
-    public int debt;
+    public float debt;
     public HashSet<string> achievements = new HashSet<string>();
 
     public void Start() {

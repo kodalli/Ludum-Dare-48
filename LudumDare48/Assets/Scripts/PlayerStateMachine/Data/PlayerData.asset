@@ -19,7 +19,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpVelocity: 10
-  amountOfJumps: 1
+  amountOfJumps: 2
   coyoteTime: 0.2
   fallMulitiplier: 5
   lowJumpMulitiplier: 10
