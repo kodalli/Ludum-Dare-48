@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour, IPooledObject {
     public void Shoot() {
         sr.flipX = (Direction.x < 0);
         rb.velocity = Direction * (Speed + Mathf.Abs(Player.Instance.CurrentVelocity.x));
-        transform.localScale = Vector3.one;
+        // transform.localScale = Vector3.one;
     }
 
     private void FixedUpdate() {
@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour, IPooledObject {
 
     private void OnTriggerEnter2D(Collider2D other) {
         other.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(Damage);
-        // gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -52,9 +52,9 @@ public class Bullet : MonoBehaviour, IPooledObject {
 
     private void Accelerate() {
         rb.velocity *= 1.01f;
-        scale.x = transform.localScale.x * 1.01f;
-        scale.y = transform.localScale.y * 1.01f;
-        transform.localScale = scale;
+        // scale.x = transform.localScale.x * 1.01f;
+        // scale.y = transform.localScale.y * 1.01f;
+        // transform.localScale = scale;
     }
 }
 
