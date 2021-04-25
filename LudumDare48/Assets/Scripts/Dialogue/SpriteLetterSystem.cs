@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 
 //Attatch this to something, ideally something in a unity canvas
-public class SpriteLetterSystem : MonoBehaviour {
+public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     private enum TextEffect { None, Wavy, Shaky }
 
     #region Variables
@@ -231,7 +231,7 @@ public class SpriteLetterSystem : MonoBehaviour {
         int end = start;
         int length = 0;
 
-        while (fullText[end] != ')' && end < fullText.Length) {
+        while (end < fullText.Length && fullText[end] != ')') {
             end++;
             length++;
         }
@@ -241,7 +241,10 @@ public class SpriteLetterSystem : MonoBehaviour {
 
         // [256, 256, 256]
         string[] strSplit = str.Split(',');
-        if (strSplit.Length != 3) Debug.LogError("color must follow c=(0-256,0-256,0-256) format");
+
+        // Debug.Log(strSplit.Length + " " + fullText + " " + str);
+
+        if (strSplit.Length != 3 && end != fullText.Length) Debug.LogError("color must follow <c=(0-256,0-256,0-256)></c> format");
 
         int[] colorParams = strSplit.Select(int.Parse).ToArray();
 

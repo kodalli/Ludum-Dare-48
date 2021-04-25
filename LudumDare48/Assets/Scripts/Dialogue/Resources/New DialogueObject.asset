@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueID: 1
   dialogue:
-  - Test dialogue; wow -+ yeehaw!
+  - this is a text dialogue <c=(255,0,0)>yeehaw</c>
   responseOptions: []

@@ -5,10 +5,16 @@ using UnityEngine;
 public class AchievementSystem : MonoBehaviour {
     [SerializeField] private GameObject dialoguePanel;
 
+
+    private void Start() {
+        PointOfInterest.OnPoiEntered += OnPoiEnteredNotification;
+    }
+
     private void OnDestroy() {
         PointOfInterest.OnPoiEntered -= OnPoiEnteredNotification;
     }
     private void OnPoiEnteredNotification(PointOfInterest poi) {
-        throw new System.NotImplementedException();
+        // throw new System.NotImplementedException();
+        string achievementKey = "";
     }
 }

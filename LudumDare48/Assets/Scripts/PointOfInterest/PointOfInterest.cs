@@ -9,7 +9,7 @@ public class PointOfInterest : MonoBehaviour {
 
     [SerializeField] private string _poiName;
 
-    public string PoiName { get { return _poiName; } }
+    public string PoiName { get => _poiName; }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (OnPoiEntered != null) {

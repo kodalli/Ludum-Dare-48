@@ -57,7 +57,8 @@ public static class FontLoader {
         if (IsFontLoaded(characterSheet)) return loadedFonts[loadedFontResources.IndexOf(characterSheet)];
 
         Sprite[] subsprites = Resources.LoadAll<Sprite>(characterSheet.name);
-        int spriteSize = (int)subsprites[0].rect.width; //characterSheet.width / subsprites.Length; //OLD
+        int spriteSize = (int)subsprites.Max(x => x.rect.width);
+        // int spriteSize = (int)subsprites[0].rect.width; //characterSheet.width / subsprites.Length; //OLD
 
         Debug.Log(subsprites.Length);
         Debug.Log(chars.Length);
@@ -151,22 +152,31 @@ public static class FontLoader {
                 }
 
                 //Store current sprite width
-                int currentSpriteWidth = Mathf.Max(spriteSize - (leftEdge + rightEdge), 3);
+                // int currentSpriteWidth = Mathf.Max(spriteSize - (leftEdge + rightEdge), 1);
+                int currentSpriteWidth = spriteSize - (leftEdge + rightEdge);
 
-                // if (currentSpriteWidth < 0) {
-                //     Debug.Log($"{chars[charIndex]} width {currentSpriteWidth} {spriteSize} {leftEdge} {rightEdge}");
-                //     // vape fix, just manually set width for "!" because its setting the width to -8
-                //     currentSpriteWidth = 1;
-                // }
+                if (currentSpriteWidth < 0) {
+                    // Debug.Log($"{chars[charIndex]} width {currentSpriteWidth} {spriteSize} {leftEdge} {rightEdge}");
+                    // vape fix, just manually set width for "!" and "B" because its setting the width to < 0
+                    // CharData temp = charData['A'];
+                    charData.Add(chars[charIndex], new CharData(14, characterSprites[charIndex], 3, 3));
+                } else {
+                    //Determine center offsets
+                    int halfWidth = spriteSize / 2;
+                    int leftOffset = halfWidth - leftEdge;
+                    int rightOffset = halfWidth - rightEdge;
 
-                Debug.Log($"{chars[charIndex]} {currentSpriteWidth}");
+                    charData.Add(chars[charIndex], new CharData(currentSpriteWidth, characterSprites[charIndex], leftOffset, rightOffset));
+                }
 
-                //Determine center offsets
-                int halfWidth = spriteSize / 2;
-                int leftOffset = halfWidth - leftEdge;
-                int rightOffset = halfWidth - rightEdge;
+                // Debug.Log($"{chars[charIndex]} width {currentSpriteWidth} {spriteSize} {leftEdge} {rightEdge}");
 
-                charData.Add(chars[charIndex], new CharData(currentSpriteWidth, characterSprites[charIndex], leftOffset, rightOffset));
+                // //Determine center offsets
+                // int halfWidth = spriteSize / 2;
+                // int leftOffset = halfWidth - leftEdge;
+                // int rightOffset = halfWidth - rightEdge;
+
+                // charData.Add(chars[charIndex], new CharData(currentSpriteWidth, characterSprites[charIndex], leftOffset, rightOffset));
 
                 // fix for first sprite being empty in sprite sheet
                 // if (charIndex > 0 && charIndex < chars.Length)
