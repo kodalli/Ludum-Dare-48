@@ -36,7 +36,7 @@ public class SpriteLetterSystem : MonoBehaviour {
     [SerializeField] private float shakyStrength = 0.5f;
     // private
     private TextEffect activeEffect;
-    private Color activeColor = Color.black;
+    private Color activeColor = Color.white;
     private List<GameObject> letterObjects = new List<GameObject>();
     private Dictionary<CharSpriteData, TextEffect> fxChars = new Dictionary<CharSpriteData, TextEffect>();
     private Dictionary<char, CharData> loadedFont;
@@ -63,7 +63,7 @@ public class SpriteLetterSystem : MonoBehaviour {
     private void Start() {
         // string textToGenerate = "<c=(255,50,120)><w>I am a top level Chungoloist</w></c>, and I have concluded with <c=(255,0,0)>absolute</c> <c=(0,255,0)>certainty </c>that Big Chungus himself shall enter into existence at 2:31 PM this April 9th.";
         string textToGenerate = dObj.dialogue[0];
-        // GenerateSpriteText(textToGenerate);
+        GenerateSpriteText(textToGenerate);
         // transform.localScale = new Vector3(letterSize / 100f, letterSize / 100f, 1f);
 
     }
@@ -213,7 +213,7 @@ public class SpriteLetterSystem : MonoBehaviour {
                 }
             } else {
                 activeEffect = TextEffect.None;
-                activeColor = Color.black;
+                activeColor = Color.white;
             }
         } else if (j > 0 && fullText[j - 1] == '>') {
             inTag = false;
