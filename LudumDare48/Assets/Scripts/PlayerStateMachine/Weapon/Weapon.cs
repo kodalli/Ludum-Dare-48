@@ -3,19 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour {
-    private PlayerState state;
-    private float timeSinceFirstAttack;
     [SerializeField] private SO_WeaponData weaponData;
     [SerializeField] private Transform bulletShootPosition;
     public float FireRate { get => weaponData.fireRate; }
-    private void Start() {
-
-    }
-
-    public virtual void EnterWeapon() {
-
-    }
-
     public void ShootBullet() {
         // GameObject bullet = Instantiate((GameObject)Resources.Load("Bullet"), bulletShootPosition.position, Quaternion.identity);
         GameObject bullet = ObjectPooler.Instance.SpawnFromPool("Bullet", bulletShootPosition.position, Quaternion.identity);
@@ -25,7 +15,5 @@ public class Weapon : MonoBehaviour {
         bullet.GetComponent<Bullet>().DestroyDelay = weaponData.bulletDestroyDelay;
         bullet.GetComponent<Bullet>().Shoot();
     }
-
-    public void InitializeWeapon(PlayerState state) => this.state = state;
 
 }

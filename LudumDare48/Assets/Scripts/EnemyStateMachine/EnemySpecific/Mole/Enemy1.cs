@@ -28,6 +28,8 @@ public class Enemy1 : Entity, IDamageable {
     [SerializeField] private SO_ChargeState chargeStateData;
     [SerializeField] private SO_LookForPlayer lookForPlayerStateData;
 
+    public MoleRockThrow rockThrow;
+
 
     public override void Start() {
         base.Start();
@@ -40,6 +42,8 @@ public class Enemy1 : Entity, IDamageable {
         chargeState = new E1_ChargeState(this, StateMachine, "charge", chargeStateData, this);
         lookForPlayerState = new E1_LookForPlayerState(this, StateMachine, "lookForPlayer", lookForPlayerStateData, this);
 
+        playerDetectedState.SetWeapon(rockThrow);
+
         StateMachine.Initialize(idleState);
     }
     public void TakeDamage(float damage) {
@@ -50,9 +54,9 @@ public class Enemy1 : Entity, IDamageable {
             if (enemyDelegate != null) enemyDelegate(this);
             Destroy(this.gameObject, 0.1f);
         }
-        Debug.Log(currentHealth);
+        Debug.Log(EnemyName + " " + currentHealth);
 
-        Debug.Log(EnemyDelegateCount);
+        // Debug.Log(EnemyDelegateCount);
     }
 
     public override void OnDrawGizmos() {
