@@ -11,6 +11,10 @@ public class Player : Singleton<Player>, IDamageable {
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
+    public PlayerInAirState InAirState { get; private set; }
+    public PlayerLandState LandState { get; private set; }
+
     [SerializeField] private PlayerData playerData;
     [SerializeField] private Weapon weapon;
 
@@ -27,6 +31,7 @@ public class Player : Singleton<Player>, IDamageable {
     #region Check Transforms
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
+    [SerializeField] private Transform ledgeCheck;
 
     #endregion
 
@@ -44,6 +49,10 @@ public class Player : Singleton<Player>, IDamageable {
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
         MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
+        JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
+        InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
+        LandState = new PlayerLandState(this, StateMachine, playerData, "land");
+
     }
     private void Start() {
         Anim = GetComponent<Animator>();
@@ -58,6 +67,8 @@ public class Player : Singleton<Player>, IDamageable {
         StateMachine.Initialize(IdleState);
     }
     private void Update() {
+
+        CurrentVelocity = RB.velocity;
         Shoot();
         StateMachine.CurrentState.LogicUpdate();
 
@@ -76,9 +87,16 @@ public class Player : Singleton<Player>, IDamageable {
 
     public bool CheckIfGrounded() => Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
     public bool CheckIfTouchingWall() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
+    public bool CheckIfTouchingLedge() => Physics2D.Raycast(ledgeCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
+
 
     public void SetVelocityX(float velocity) {
         previousVelocity.Set(velocity, CurrentVelocity.y);
+        RB.velocity = previousVelocity;
+        CurrentVelocity = previousVelocity;
+    }
+    public void SetVelocityY(float velocity) {
+        previousVelocity.Set(CurrentVelocity.x, velocity);
         RB.velocity = previousVelocity;
         CurrentVelocity = previousVelocity;
     }

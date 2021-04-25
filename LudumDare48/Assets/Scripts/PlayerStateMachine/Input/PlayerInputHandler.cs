@@ -14,11 +14,20 @@ public class PlayerInputHandler : MonoBehaviour {
     public int NormInputX { get; private set; }
     public int NormInputY { get; private set; }
 
+    public bool JumpInput { get; private set; }
+    public bool JumpInputStop { get; private set; }
+
+    [SerializeField] private float inputHoldTime; // Fixes Double Jump from spamming Spacebar
+    private float jumpinputStartTime;
+
     public bool[] AttackInputs { get; private set; }
 
     private void Start() {
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
         AttackInputs = new bool[count];
+    }
+    private void Update() {
+        CheckJumpInputHoldTime();
     }
 
     public void OnMoveInput(InputAction.CallbackContext context) {
@@ -27,7 +36,19 @@ public class PlayerInputHandler : MonoBehaviour {
         NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
         NormInputY = (int)(RawMovementInput * Vector2.up).normalized.y;
     }
+    public void OnJumpInput(InputAction.CallbackContext context) {
+        if (context.started) {
+            JumpInput = true;
+            JumpInputStop = false;
+            jumpinputStartTime = Time.time;
+        }
+        if (context.canceled) {
+            JumpInputStop = true;
+        }
+    }
+    private void CheckJumpInputHoldTime() { if (Time.time >= jumpinputStartTime + inputHoldTime) JumpInput = false; }
 
+    public void UseJumpInput() => JumpInput = false;
     public void OnPrimaryAttackInput(InputAction.CallbackContext context) {
         if (context.started) { AttackInputs[(int)CombatInputs.PRIMARY] = true; }
         if (context.canceled) { AttackInputs[(int)CombatInputs.PRIMARY] = false; }
