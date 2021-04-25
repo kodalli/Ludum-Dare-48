@@ -60,8 +60,8 @@ public static class FontLoader {
         int spriteSize = (int)subsprites.Max(x => x.rect.width);
         // int spriteSize = (int)subsprites[0].rect.width; //characterSheet.width / subsprites.Length; //OLD
 
-        Debug.Log(subsprites.Length);
-        Debug.Log(chars.Length);
+        // Debug.Log(subsprites.Length);
+        // Debug.Log(chars.Length);
 
         Dictionary<char, CharData> loadedFontDictionary = GenerateCharFontDictionary(characterSheet, spriteSize, subsprites);
 

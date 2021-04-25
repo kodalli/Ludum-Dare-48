@@ -9,6 +9,7 @@ public class GlobalSave : MonoBehaviour {
         if (Instance == null) {
             DontDestroyOnLoad(gameObject);
             Instance = this;
+            saveData.Start();
         } else if (Instance != this) {
             Destroy(gameObject);
         }

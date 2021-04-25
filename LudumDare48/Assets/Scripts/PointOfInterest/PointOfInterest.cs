@@ -14,6 +14,7 @@ public class PointOfInterest : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (OnPoiEntered != null) {
             OnPoiEntered(this);
+            // gameObject.SetActive(false);
         }
     }
 

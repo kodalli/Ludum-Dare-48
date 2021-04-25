@@ -9,7 +9,7 @@ public class LocalSave : Singleton<LocalSave> {
         this.saveData = GlobalSave.Instance.saveData;
     }
     private void Update() {
-
+        // Save();
     }
     public void Save() {
         if (GlobalSave.Instance != null) GlobalSave.Instance.saveData = this.saveData;

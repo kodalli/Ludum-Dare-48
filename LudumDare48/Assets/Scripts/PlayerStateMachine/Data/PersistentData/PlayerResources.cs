@@ -10,5 +10,10 @@ public class PlayerResources {
     public int gems; // trade in to pay off debt or purchase upgrade
     public int upgrades;
     public int debt;
-    public Dictionary<string, bool> achievements = new Dictionary<string, bool>();
+    public HashSet<string> achievements = new HashSet<string>();
+
+    public void Start() {
+        // hashet first element gets yeeted for some reason
+        LocalSave.Instance.saveData.achievements.Add("dummy");
+    }
 }

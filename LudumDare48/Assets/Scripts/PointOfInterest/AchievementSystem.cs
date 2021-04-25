@@ -7,6 +7,7 @@ public class AchievementSystem : MonoBehaviour {
 
 
     private void Start() {
+        PlayerPrefs.DeleteAll();
         PointOfInterest.OnPoiEntered += OnPoiEnteredNotification;
     }
 
@@ -14,7 +15,21 @@ public class AchievementSystem : MonoBehaviour {
         PointOfInterest.OnPoiEntered -= OnPoiEnteredNotification;
     }
     private void OnPoiEnteredNotification(PointOfInterest poi) {
-        // throw new System.NotImplementedException();
-        string achievementKey = "";
+        string achievementKey = "achievement-" + poi.PoiName;
+
+        if (LocalSave.Instance.saveData.achievements.Contains(achievementKey)) {
+            return;
+        } else {
+            LocalSave.Instance.saveData.achievements.Add(achievementKey);
+            Debug.Log("hashset " + string.Join("", LocalSave.Instance.saveData.achievements));
+
+            dialoguePanel.SetActive(true);
+            SpriteLetterSystem.Instance.GenerateSpriteText($"unlocked: <c=(255,50,120)><w>{poi.PoiName}</w></c>");
+            StartCoroutine(RemoveDialoguePanel());
+        }
+    }
+    IEnumerator RemoveDialoguePanel() {
+        yield return new WaitForSeconds(2f);
+        dialoguePanel.SetActive(false);
     }
 }
