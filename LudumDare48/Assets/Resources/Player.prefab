@@ -69,6 +69,7 @@ Transform:
   - {fileID: 2066518469422022152}
   - {fileID: 2066518468842497975}
   - {fileID: 2066518469207723788}
+  - {fileID: 4327719333979226288}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -258,6 +259,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 920e9b63-d3bc-4998-8417-f84dab1cbb3f
     m_ActionName: Gameplay/Shoot[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2066518468668834526}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnJumpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 56b44ccd-dddc-4b0c-b6a5-8fd7bb561891
+    m_ActionName: Gameplay/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -281,6 +298,7 @@ MonoBehaviour:
   weapon: {fileID: 2066518468842497974}
   groundCheck: {fileID: 2066518467952327696}
   wallCheck: {fileID: 2066518469422022152}
+  ledgeCheck: {fileID: 4327719333979226288}
 --- !u!1 &2066518468825061637
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,9 +344,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.703
-  m_Color: {r: 0.9669811, g: 0.9723316, b: 1, a: 1}
-  m_Intensity: 1
+  m_FalloffIntensity: 0.7
+  m_Color: {r: 0.8726415, g: 0.8885613, b: 1, a: 1}
+  m_Intensity: 0.96
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 000000002d713f3f8b35b33fffd883ce95656002
   m_LightCookieSprite: {fileID: 0}
@@ -340,7 +358,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.7
-  m_PointLightOuterRadius: 22.13
+  m_PointLightOuterRadius: 12.9
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -509,4 +527,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2066518468668834523}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2475438150008067194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4327719333979226288}
+  m_Layer: 7
+  m_Name: LedgeCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4327719333979226288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475438150008067194}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.51, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2066518468668834523}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
