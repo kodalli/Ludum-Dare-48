@@ -2660,7 +2660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc8cd7ca169ec642a9de3b3cfa48ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poiName: gem
 --- !u!58 &903338943
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4227,7 +4226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc8cd7ca169ec642a9de3b3cfa48ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poiName: gem2
 --- !u!58 &1856405781
 CircleCollider2D:
   m_ObjectHideFlags: 0
