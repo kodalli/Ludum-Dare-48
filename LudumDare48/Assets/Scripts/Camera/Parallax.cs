@@ -12,10 +12,6 @@ public class Parallax : MonoBehaviour {
     private float textureUnitSizeX;
     private float textureUnitSizeY;
 
-    [SerializeField] private Transform target;
-    [SerializeField] private GameObject bg1;
-    [SerializeField] private GameObject bg2;
-
     private void Start() {
         cameraTransform = Camera.main.transform;
         lastCameraPosition = cameraTransform.position;
