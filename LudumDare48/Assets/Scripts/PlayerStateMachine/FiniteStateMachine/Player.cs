@@ -189,7 +189,6 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
     private void PlayDamageEffect() {
         CinemachineShake.Instance.ShakeCamera(3f, 0.2f);
 
-
         var scale = transform.localScale;
         scale.x *= -1;
         damageEffect.transform.localScale = scale;
