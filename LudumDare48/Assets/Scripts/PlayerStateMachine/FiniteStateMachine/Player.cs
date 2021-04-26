@@ -183,4 +183,8 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
         LocalSave.Instance.saveData.gems++;
         return true;
     }
+
+    public void TakeDamage(float damage, bool hitFromRight) {
+        throw new System.NotImplementedException();
+    }
 }

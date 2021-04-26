@@ -48,10 +48,11 @@ public class Enemy1 : Entity, IDamageable {
 
         StateMachine.Initialize(idleState);
     }
-    public void TakeDamage(float damage) {
+    public void TakeDamage(float damage, bool hitFromRight) {
 
 
         PlayDamageEffect();
+        damagedState.HitSide(hitFromRight);
         StateMachine.ChangeState(damagedState);
 
         currentHealth -= (int)damage;
@@ -85,4 +86,7 @@ public class Enemy1 : Entity, IDamageable {
 
     public void RemoveDelegate(Action<Enemy1> func) { if (EnemyDelegateCount > 0) enemyDelegate -= func; }
 
+    public void TakeDamage(float damage) {
+        throw new NotImplementedException();
+    }
 }

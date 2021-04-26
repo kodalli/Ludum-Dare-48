@@ -32455,7 +32455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce5ec0420240904a83f6f4e5766cfac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialoguePanel: {fileID: 638951143414457264}
 --- !u!1 &1296764080
 GameObject:
   m_ObjectHideFlags: 0
@@ -37965,6 +37964,42 @@ PrefabInstance:
       propertyPath: m_FalloffIntensity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3653355239613582816, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653355239613582816, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
+      propertyPath: m_GravityScale
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653355239613582819, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
+      propertyPath: drag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653355239613582819, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
+      propertyPath: speed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653355239613582819, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
+      propertyPath: health
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653355239613582819, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
+      propertyPath: hitForce.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653355239613582819, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
+      propertyPath: hitForce.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653355239613582846, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
+      propertyPath: m_Radius
+      value: 0.63408244
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653355239613582846, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.19313358
+      objectReference: {fileID: 0}
     - target: {fileID: 5963323368894161009, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -38015,7 +38050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6088889711038241491, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
@@ -38450,7 +38485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 318658076401789450, guid: 423428425a2d0444397a0b2b2903868f, type: 3}
       propertyPath: m_Intensity
-      value: 0.1
+      value: 1.81
       objectReference: {fileID: 0}
     - target: {fileID: 318658076401789451, guid: 423428425a2d0444397a0b2b2903868f, type: 3}
       propertyPath: m_Name

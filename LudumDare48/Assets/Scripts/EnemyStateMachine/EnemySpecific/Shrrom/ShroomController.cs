@@ -17,6 +17,9 @@ public class ShroomController : MonoBehaviour, IDamageable {
     [SerializeField] Transform playerCheck;
     [SerializeField] float playerCheckDistance;
 
+    [SerializeField] Vector2 hitForce;
+    [SerializeField] float drag;
+
     bool isPlayerInRange;
     bool isDetected;
 
@@ -59,6 +62,8 @@ public class ShroomController : MonoBehaviour, IDamageable {
         if (health <= 0) {
             Destroy(this.gameObject, 0.1f);
         }
+        rb.AddForce(hitForce, ForceMode2D.Impulse);
+        Debug.Log(health);
     }
     IEnumerator DestroyShroom() {
         yield return new WaitForSeconds(destroyTime);
@@ -69,5 +74,20 @@ public class ShroomController : MonoBehaviour, IDamageable {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(playerCheck.position, playerCheck.position + (Vector3)(-Vector2.right * playerCheckDistance));
 
+    }
+
+    public void TakeDamage(float damage, bool hitFromRight) {
+        health -= (int)damage;
+
+        hitForce.x *= hitFromRight ? -1 : 1;
+
+        rb.drag = drag;
+
+        rb.AddForce(hitForce, ForceMode2D.Impulse);
+
+        if (health <= 0) {
+            Destroy(this.gameObject, 0.1f);
+        }
+        Debug.Log(health);
     }
 }
