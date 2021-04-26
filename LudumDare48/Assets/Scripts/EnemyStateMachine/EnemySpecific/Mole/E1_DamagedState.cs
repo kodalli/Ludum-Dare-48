@@ -5,13 +5,14 @@ using System;
 
 public class E1_DamagedState : DamagedState {
     private Enemy1 enemy;
-    private float damageTime = 0.4f;
+    private float damageTime = 0.5f;
     private float countDown;
     public E1_DamagedState(Entity entity, EnemyStateMachine stateMachine, string animBoolName, Enemy1 enemy) : base(entity, stateMachine, animBoolName) {
         this.enemy = enemy;
     }
     public override void Enter() {
         base.Enter();
+        enemy.StateMachine.preventStateChange = true;
         countDown = damageTime;
 
     }
@@ -31,9 +32,14 @@ public class E1_DamagedState : DamagedState {
         if (countDown >= 0) {
             countDown -= Time.deltaTime;
             return;
+        } else {
+            enemy.StateMachine.preventStateChange = false;
+            FinishDamaged();
         }
 
-        isAnimationFinished = true;
+
+        // isAnimationFinished = true;
+        // isTakingDamage = false;
     }
 
 

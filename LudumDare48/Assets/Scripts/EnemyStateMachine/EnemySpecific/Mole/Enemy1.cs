@@ -10,6 +10,7 @@ public class Enemy1 : Entity, IDamageable {
     [SerializeField] private int currentHealth;
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private string enemyName;
+    [SerializeField] private Vector2 hitForce = new Vector2(10, 5);
 
     public string EnemyName { get { return enemyName; } }
 
@@ -53,6 +54,7 @@ public class Enemy1 : Entity, IDamageable {
 
         PlayDamageEffect();
         damagedState.HitSide(hitFromRight);
+        damagedState.SetHitForce(hitForce.x, hitForce.y);
         StateMachine.ChangeState(damagedState);
 
         currentHealth -= (int)damage;

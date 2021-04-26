@@ -14,10 +14,11 @@ public class AnimationToStateMachine : MonoBehaviour {
 
     // private void TriggerDamaged() => GetComponentInParent<Enemy1>().damagedState.TriggerDamaged();
     public void FinishDamagedAnimation() {
-        var x = GetComponentInParent<Enemy1>().damagedState;
-        Debug.Log("hi");
-        Debug.Log(x);
-        x.FinishDamaged();
+        return;
+        // var x = GetComponentInParent<Enemy1>().damagedState;
+        // Debug.Log("hi");
+        // Debug.Log(x);
+        // x.FinishDamaged();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

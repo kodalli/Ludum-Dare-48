@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DamagedState : EnemyState {
     public bool isAnimationFinished;
-    protected bool isTakingDamage;
+    // protected bool isTakingDamage;
     protected bool hitSideRight;
     protected float hitForceX, hitForceY;
 
@@ -21,9 +21,17 @@ public class DamagedState : EnemyState {
     public override void Enter() {
         base.Enter();
         isAnimationFinished = false;
-        hitForceX = 4f;
-        hitForceY = 5f;
+        // hitForceX = 4f;
+        // hitForceY = 5f;
+        // entity.RB.drag = 2f;
         StartDamageAnimation();
+        Debug.Log("damage animation started");
+    }
+
+    public override void Exit() {
+        base.Exit();
+        Debug.Log("damage animation ended");
+        // entity.RB.drag = 0;
     }
 
 
@@ -38,14 +46,15 @@ public class DamagedState : EnemyState {
 
     protected virtual void StartDamageAnimation() {
         // isAnimationFinished = false;
-        if (!isTakingDamage) {
-            isTakingDamage = true;
+        if (!isAnimationFinished) {
             if (hitSideRight) hitForceX *= -1;
-            entity.RB.drag = 0f;
-            // entity.RB.velocity = Vector2.zero;
+            entity.RB.velocity = Vector2.zero;
+            entity.RB.drag = 2;
+            entity.RB.AddForce(Vector2.up, ForceMode2D.Impulse);
             entity.RB.AddForce(new Vector2(hitForceX, hitForceY), ForceMode2D.Impulse);
+            hitForceX = Mathf.Abs(hitForceX);
             // isAnimationFinished = true;
-            Debug.Log(isAnimationFinished);
+            // Debug.Log("force applied " + isAnimationFinished);
             // sound
         }
     }
@@ -62,6 +71,11 @@ public class DamagedState : EnemyState {
     // public virtual void TriggerDamaged() {
     //     StartDamageAnimation();
     // }
-    public virtual void FinishDamaged() { isAnimationFinished = true; isTakingDamage = false; }
+    public virtual void FinishDamaged() {
+        isAnimationFinished = true;
+        // isTakingDamage = false;
+        entity.RB.drag = 0f;
+        Debug.Log("drag " + entity.RB.drag);
+    }
 
 }

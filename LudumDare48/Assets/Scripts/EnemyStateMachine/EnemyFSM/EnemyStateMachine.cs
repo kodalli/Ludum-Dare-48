@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyStateMachine {
 
     public EnemyState CurrentState { get; private set; }
+    public bool preventStateChange;
 
     /// <summary>
     /// Initializes starting state for entity
@@ -20,6 +21,7 @@ public class EnemyStateMachine {
     /// </summary>
     /// <param name="newState"></param>
     public void ChangeState(EnemyState newState) {
+        if (preventStateChange) return;
         CurrentState.Exit();
         CurrentState = newState;
         CurrentState.Enter();

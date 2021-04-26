@@ -37928,6 +37928,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   enemyName: Mole boi
+  hitForce: {x: 10, y: 5}
   idleStateData: {fileID: 11400000, guid: 0b1d9a79155a6af429ed48148446d50e, type: 2}
   moveStateData: {fileID: 11400000, guid: cfff7b4fd2c1d704193d5dc7f907349c, type: 2}
   playerDetectedData: {fileID: 11400000, guid: d391e5c8b93fa4c418f0198e0488c02b, type: 2}
@@ -38050,7 +38051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6088889711038241491, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc7773ceb00829b4aaf2d6c9b4ab7de8, type: 3}
