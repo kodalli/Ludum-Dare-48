@@ -5,19 +5,49 @@ using UnityEngine;
 public class ShroomController : MonoBehaviour {
     Rigidbody2D rb;
 
-    [SerializeField] private float rotateSpeed = 10f;
-    [SerializeField] private float speed;
-    private void Awake() {
+    [SerializeField] float rotateSpeed = 10f;
+    [SerializeField] float speed;
+
+    [SerializeField] float contactDamage;
+
+    [SerializeField] LayerMask whatIsPlayer;
+
+    [SerializeField] Transform playerCheck;
+    [SerializeField] float playerCheckDistance;
+
+    bool isPlayerInRange;
+
+    void Awake() {
         rb = GetComponent<Rigidbody2D>();
     }
-    void Start() {
-        rb.velocity = speed * Vector2.left;
+
+    void Update() {
+        isPlayerInRange = CheckPlayerInRange();
     }
 
     void FixedUpdate() {
-        transform.Rotate(0, 0, rotateSpeed);
+        if (isPlayerInRange) {
+            rb.velocity = speed * Vector2.left;
+            transform.Rotate(0, 0, rotateSpeed);
+        }
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+
+    bool CheckPlayerInRange() => Physics2D.Raycast(playerCheck.position, -Vector2.right, playerCheckDistance, whatIsPlayer);
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.GetComponent<IIgnoreObject>()?.IgnoreMe() != null) return;
+
+        var player = other.gameObject.GetComponent<IDamageable>();
+
+        if (player != null) {
+            player.TakeDamage(contactDamage);
+            Destroy(this.gameObject);
+        }
+    }
+
+    void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(playerCheck.position, playerCheck.position + (Vector3)(-Vector2.right * playerCheckDistance));
 
     }
 }
