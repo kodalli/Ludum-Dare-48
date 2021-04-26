@@ -145,9 +145,11 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
             // stateMachine.ChangeState(player.PrimaryAttackState);
             if (countDown <= 0) {
                 countDown = 1f / weapon.FireRate;
-                weapon.ShootBullet();
-                currentOxygen--;
-                UIManager.Instance.SetOxgyenHUD();
+                if (currentOxygen > 0f) {
+                    weapon.ShootBullet();
+                    currentOxygen--;
+                    UIManager.Instance.SetOxgyenHUD();
+                }
             }
         }
 
