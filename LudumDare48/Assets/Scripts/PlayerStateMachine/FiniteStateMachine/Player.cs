@@ -181,7 +181,8 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
         damageEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void OnCollect() {
+    public bool OnCollect() {
         LocalSave.Instance.saveData.gems++;
+        return true;
     }
 }

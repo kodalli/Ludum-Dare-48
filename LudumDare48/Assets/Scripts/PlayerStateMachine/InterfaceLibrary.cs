@@ -11,5 +11,5 @@ public interface IIgnoreObject {
 }
 
 public interface ICollector {
-    void OnCollect();
+    bool OnCollect();
 }
