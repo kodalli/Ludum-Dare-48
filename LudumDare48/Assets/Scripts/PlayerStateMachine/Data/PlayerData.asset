@@ -18,7 +18,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  jumpVelocity: 10
+  jumpVelocity: 13
   amountOfJumps: 2
   coyoteTime: 0.2
   fallMulitiplier: 5
