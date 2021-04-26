@@ -48,6 +48,13 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
     public float MaxOxygen { get => maxOxygen; }
     public float CurrentHP { get => currentHealth; }
     public float CurrentOxygen { get => currentOxygen; }
+    public int CurrentGems {
+        get => LocalSave.Instance.saveData.gems;
+        set {
+            LocalSave.Instance.saveData.gems = value;
+            UIManager.Instance.SetGemsHUD();
+        }
+    }
     private float countDown;
     private float oxygenCountDown;
     #endregion
@@ -76,6 +83,7 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
 
         UIManager.Instance.SetHPHUD();
         UIManager.Instance.SetOxgyenHUD();
+        UIManager.Instance.SetGemsHUD();
 
 
         StateMachine.Initialize(IdleState);
@@ -164,14 +172,22 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
 
         if (oxygenCountDown <= 0) {
             oxygenCountDown = oxygenUsageRate;
-            currentOxygen--;
-            UIManager.Instance.SetOxgyenHUD();
+            if (currentOxygen > 0f) {
+                currentOxygen--;
+                UIManager.Instance.SetOxgyenHUD();
+            } else {
+                currentHealth--;
+                UIManager.Instance.SetHPHUD();
+            }
         }
 
         if (oxygenCountDown >= 0) oxygenCountDown -= Time.deltaTime;
     }
 
     private void PlayDamageEffect() {
+        CinemachineShake.Instance.ShakeCamera(3f, 0.2f);
+
+
         var scale = transform.localScale;
         scale.x *= -1;
         damageEffect.transform.localScale = scale;
@@ -180,7 +196,7 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
     }
 
     public bool OnCollect() {
-        LocalSave.Instance.saveData.gems++;
+        Player.Instance.CurrentGems++;
         return true;
     }
 

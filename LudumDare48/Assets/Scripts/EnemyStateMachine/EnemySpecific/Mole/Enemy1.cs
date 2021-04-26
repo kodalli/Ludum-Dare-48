@@ -59,8 +59,11 @@ public class Enemy1 : Entity, IDamageable {
 
         currentHealth -= (int)damage;
 
+        CinemachineShake.Instance.ShakeCamera(3f, 0.2f);
+
         if (currentHealth <= 0) {
             if (enemyDelegate != null) enemyDelegate(this);
+
             Destroy(this.gameObject, 0.1f);
         }
         Debug.Log(EnemyName + " " + currentHealth);

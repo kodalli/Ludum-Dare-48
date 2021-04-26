@@ -58,6 +58,7 @@ public class ShroomController : MonoBehaviour, IDamageable {
         }
     }
     public void TakeDamage(float damage) {
+        CinemachineShake.Instance.ShakeCamera(3f, 0.2f);
         health -= (int)damage;
         if (health <= 0) {
             Destroy(this.gameObject, 0.1f);

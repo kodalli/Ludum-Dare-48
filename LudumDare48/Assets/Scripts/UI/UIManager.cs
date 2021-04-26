@@ -23,10 +23,12 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
     // Main Game HUD
     private TextMeshProUGUI currentHPText;
     private TextMeshProUGUI currentOxygenText;
+    private TextMeshProUGUI currentGemsText;
     private Image healthFill;
     private Image oxygenFill;
     [SerializeField] private GameObject tooltip;
     // [SerializeField] private TextMeshProUGUI tooltipText;
+    private int upgradeCost = 1;
 
     #region 
     private void Awake() {
@@ -34,6 +36,7 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
         currentOxygenText = gameObject.FindInChildren("HUD_CURRENT_O2_TEXT").GetComponent<TextMeshProUGUI>();
         healthFill = gameObject.FindInChildren("HUD_CURRENT_HEALTH_FILL").GetComponent<Image>();
         oxygenFill = gameObject.FindInChildren("HUD_CURRENT_O2_FILL").GetComponent<Image>();
+        currentGemsText = gameObject.FindInChildren("HUD_CURRENT_GEMS_TEXT").GetComponent<TextMeshProUGUI>();
     }
 
     public void SetHPHUD() {
@@ -52,12 +55,17 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
         currentOxygenText.text = Player.Instance.CurrentOxygen.ToString() + "%";
     }
 
+    public void SetGemsHUD() {
+        currentGemsText.text = Player.Instance.CurrentGems.ToString();
+    }
+
     #endregion
 
     private void TryPurchase() {
         string text;
-        if (LocalSave.Instance.saveData.gems > 1) {
-            text = "You can buy this!";
+        if (Player.Instance.CurrentGems > 0) {
+            text = "Purchase sucessful ! However, your debt continues to grow.";
+            Player.Instance.CurrentGems -= upgradeCost;
         } else {
             text = "Sorry, <c=(84, 161, 32)>Dingus</c>. I can't give <c=(235,122,52)>credit</c>. Come back when you're a little... <c=(235, 52, 208)><w>mmmmmmmmmmm</w></c> richer !";
         }

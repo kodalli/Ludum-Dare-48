@@ -75,7 +75,7 @@ public class DamagedState : EnemyState {
         isAnimationFinished = true;
         // isTakingDamage = false;
         entity.RB.drag = 0f;
-        Debug.Log("drag " + entity.RB.drag);
+        // Debug.Log("drag " + entity.RB.drag);
     }
 
 }
