@@ -53,3 +53,6 @@ TagManager:
   - name: Foreground Decorations
     uniqueID: 39871893
     locked: 0
+  - name: Gem
+    uniqueID: 1470348699
+    locked: 0
