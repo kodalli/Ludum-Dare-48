@@ -9,3 +9,7 @@ public interface IPooledObject {
 public interface IIgnoreObject {
     bool IgnoreMe();
 }
+
+public interface ICollector {
+    void OnCollect();
+}

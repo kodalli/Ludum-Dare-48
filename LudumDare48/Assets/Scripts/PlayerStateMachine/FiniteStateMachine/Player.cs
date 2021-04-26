@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Singleton<Player>, IDamageable {
+public class Player : Singleton<Player>, IDamageable, ICollector {
 
     [SerializeField] private float currentHealth;
     [SerializeField] private float maxHealth;
@@ -161,6 +161,10 @@ public class Player : Singleton<Player>, IDamageable {
         if (currentHealth <= 0) {
             Destroy(this.gameObject, 0.1f);
         }
+    }
+
+    public void OnCollector() {
+        LocalSave.Instance.saveData.gems++;
     }
 
     private void ConsumeOxygen() {
