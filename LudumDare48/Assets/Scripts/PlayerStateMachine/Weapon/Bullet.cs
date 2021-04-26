@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour, IPooledObject {
 
     public void OnObjectSpawn() {
         // StartCoroutine(DestroyBullet());
+        animator.Play("Fire");
     }
 
     public void Shoot() {

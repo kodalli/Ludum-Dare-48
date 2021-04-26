@@ -14,7 +14,6 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     [SerializeField] private GameObject letterObject;
     [SerializeField] private DialogueObject dObj;
     [SerializeField] private RectTransform dialogueBoxRT;
-    [SerializeField] private GameObject dialogueBox;
     // 
     [Header("Text Settings")]
     [SerializeField] private float letterSpacing = 3.5f;
@@ -24,7 +23,6 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
 
     public float LetterSize { set { letterSize = value; } }
     public float LetterSpacing { set { letterSpacing = value; } }
-    public GameObject DialogueBox { get => dialogueBox; }
 
     //
     [Header("Text Position In Dialogue Box")]
@@ -62,13 +60,14 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
         loadedFont = FontLoader.LoadFontResource(charSheet);
     }
 
-    // private void Start() {
-    //     // string textToGenerate = "<c=(255,50,120)><w>I am a top level Chungoloist</w></c>, and I have concluded with <c=(255,0,0)>absolute</c> <c=(0,255,0)>certainty </c>that Big Chungus himself shall enter into existence at 2:31 PM this April 9th.";
-    //     string textToGenerate = dObj.dialogue[0];
-    //     GenerateSpriteText(textToGenerate);
-    //     // transform.localScale = new Vector3(letterSize / 100f, letterSize / 100f, 1f);
+    private void Start() {
+        // string textToGenerate = "<c=(255,50,120)><w>I am a top level Chungoloist</w></c>, and I have concluded with <c=(255,0,0)>absolute</c> <c=(0,255,0)>certainty </c>that Big Chungus himself shall enter into existence at 2:31 PM this April 9th.";
+        // string textToGenerate = dObj.dialogue[0];
+        // GenerateSpriteText(textToGenerate);
+        // transform.localScale = new Vector3(letterSize / 100f, letterSize / 100f, 1f);
+        // dialogueBox.SetActive(false);
 
-    // }
+    }
 
     private void FixedUpdate() {
         DoTextEffects();

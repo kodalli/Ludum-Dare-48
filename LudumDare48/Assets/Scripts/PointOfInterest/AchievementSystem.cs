@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AchievementSystem : MonoBehaviour {
 
+    public GameObject dialogueBox;
 
     private void Start() {
         PlayerPrefs.DeleteAll();
@@ -22,7 +23,7 @@ public class AchievementSystem : MonoBehaviour {
             LocalSave.Instance.saveData.achievements.Add(achievementKey);
             Debug.Log("hashset " + string.Join("", LocalSave.Instance.saveData.achievements));
 
-            SpriteLetterSystem.Instance.DialogueBox.SetActive(true);
+            dialogueBox.SetActive(true);
 
             SpriteLetterSystem.Instance.GenerateSpriteText($"unlocked: <c=(255,50,120)><w>{poi.PoiName}</w></c>");
             StartCoroutine(RemoveDialoguePanel());
@@ -30,6 +31,6 @@ public class AchievementSystem : MonoBehaviour {
     }
     IEnumerator RemoveDialoguePanel() {
         yield return new WaitForSeconds(2f);
-        SpriteLetterSystem.Instance.DialogueBox.SetActive(false);
+        dialogueBox.SetActive(false);
     }
 }

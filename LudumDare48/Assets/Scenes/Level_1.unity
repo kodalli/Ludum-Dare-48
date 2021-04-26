@@ -31217,8 +31217,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637254304}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.89, y: -1.01, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 593037727}
@@ -32455,6 +32455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce5ec0420240904a83f6f4e5766cfac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueBox: {fileID: 638951143414457264}
 --- !u!1 &1296764080
 GameObject:
   m_ObjectHideFlags: 0
@@ -32792,6 +32793,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1423779247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423779244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ce74c440de7b14d83ad0604624e84b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLength: 1
 --- !u!1 &1516217585
 GameObject:
   m_ObjectHideFlags: 0
@@ -37943,7 +37957,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743641504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.06, y: -3, z: 0}
+  m_LocalPosition: {x: 29.06, y: -3.88, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 637254305}
@@ -39526,7 +39540,6 @@ MonoBehaviour:
   letterObject: {fileID: 7224794225551404037, guid: 2dcdedc1c600b5f4e926aa737cc60b1d, type: 3}
   dObj: {fileID: 11400000, guid: bd91b20628e1825429fac46b25f763f7, type: 2}
   dialogueBoxRT: {fileID: 638951143414457265}
-  dialogueBox: {fileID: 638951143414457264}
   letterSpacing: 5
   wordSpacing: 10
   lineSpacing: 100

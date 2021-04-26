@@ -22,7 +22,6 @@ public class PointOfInterest : MonoBehaviour {
                 OnPoiEntered(this);
                 // gameObject.SetActive(false);
             }
-            Destroy(this.gameObject);
         }
     }
 
