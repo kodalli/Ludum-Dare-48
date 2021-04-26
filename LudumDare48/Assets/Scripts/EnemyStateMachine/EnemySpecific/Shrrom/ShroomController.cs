@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShroomController : MonoBehaviour {
+public class ShroomController : MonoBehaviour, IDamageable {
     Rigidbody2D rb;
+
+    [SerializeField] private float health = 10f;
 
     [SerializeField] float rotateSpeed = 10f;
     [SerializeField] float speed;
@@ -16,18 +18,26 @@ public class ShroomController : MonoBehaviour {
     [SerializeField] float playerCheckDistance;
 
     bool isPlayerInRange;
+    bool isDetected;
+
+    float destroyTime = 3f;
 
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update() {
+    void FixedUpdate() {
         isPlayerInRange = CheckPlayerInRange();
+        PlayerDetected();
     }
 
-    void FixedUpdate() {
+    void PlayerDetected() {
         if (isPlayerInRange) {
+            isDetected = true;
             rb.velocity = speed * Vector2.left;
+            transform.Rotate(0, 0, rotateSpeed);
+            StartCoroutine(DestroyShroom());
+        } else if (isDetected) {
             transform.Rotate(0, 0, rotateSpeed);
         }
     }
@@ -43,6 +53,16 @@ public class ShroomController : MonoBehaviour {
             player.TakeDamage(contactDamage);
             Destroy(this.gameObject);
         }
+    }
+    public void TakeDamage(float damage) {
+        health -= (int)damage;
+        if (health <= 0) {
+            Destroy(this.gameObject, 0.1f);
+        }
+    }
+    IEnumerator DestroyShroom() {
+        yield return new WaitForSeconds(destroyTime);
+        Destroy(this.gameObject);
     }
 
     void OnDrawGizmos() {
