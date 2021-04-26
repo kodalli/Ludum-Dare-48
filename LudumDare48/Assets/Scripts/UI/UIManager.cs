@@ -11,6 +11,11 @@ public static class Helper {
                 where x.gameObject.name == name
                 select x.gameObject).First();
     }
+
+    public static void SetActiveAllChildren<T>(this GameObject go, bool state) where T : UnityEngine.Component {
+        go.GetComponentsInChildren<T>().ToList().ForEach(x => x.gameObject.SetActive(state));
+        go.SetActive(true);
+    }
 }
 public class UIManager : Singleton<UIManager> {
 

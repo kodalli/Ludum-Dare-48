@@ -42,6 +42,31 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     private Dictionary<char, CharData> loadedFont;
     #endregion
 
+    public void GenerateBigText(string text) {
+        letterSpacing = 6f;
+        wordSpacing = 10f;
+        lineSpacing = 110f;
+        letterSize = 80f;
+        indentLeft = 50f;
+        indentRight = 50f;
+        indentTop = -120f;
+        indentBottom = 0f;
+        GenerateSpriteText(text);
+    }
+
+    public void GenerateSmallText(string text) {
+        letterSpacing = 4f;
+        wordSpacing = 10f;
+        lineSpacing = 70f;
+        letterSize = 50f;
+        indentLeft = 40f;
+        indentRight = 30f;
+        indentTop = -60f;
+        indentBottom = 0f;
+        GenerateSpriteText(text);
+    }
+
+
     /// <summary>
     /// Container for character sprite data
     /// </summary>
@@ -56,18 +81,33 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
 
     }
 
+#if UNITY_EDITOR
+    private void OnGUI() {
+        if (GUI.Button(new Rect(0, 0, 200, 50), "Generate Big Text")) {
+            GenerateBigText(dObj.dialogue[0]);
+        } else if (GUI.Button(new Rect(0, 50, 200, 50), "Generate Small Text")) {
+            GenerateSmallText(dObj.dialogue[0]);
+        }
+        // } else if (GUI.Button(new Rect(0, 300, 200, 50), "Generate Text")) {
+        //     GenerateSpriteText(dObj.dialogue[0]);
+        // }
+    }
+#endif
+
     private void Awake() {
         loadedFont = FontLoader.LoadFontResource(charSheet);
     }
 
-    private void Start() {
-        // string textToGenerate = "<c=(255,50,120)><w>I am a top level Chungoloist</w></c>, and I have concluded with <c=(255,0,0)>absolute</c> <c=(0,255,0)>certainty </c>that Big Chungus himself shall enter into existence at 2:31 PM this April 9th.";
-        // string textToGenerate = dObj.dialogue[0];
-        // GenerateSpriteText(textToGenerate);
-        // transform.localScale = new Vector3(letterSize / 100f, letterSize / 100f, 1f);
-        // dialogueBox.SetActive(false);
+    // private void Start() {
+    //     // string textToGenerate = "<c=(255,50,120)><w>I am a top level Chungoloist</w></c>, and I have concluded with <c=(255,0,0)>absolute</c> <c=(0,255,0)>certainty </c>that Big Chungus himself shall enter into existence at 2:31 PM this April 9th.";
+    //     string textToGenerate = dObj.dialogue[0];
+    //     GenerateSpriteText(textToGenerate);
+    //     // transform.localScale = new Vector3(letterSize / 100f, letterSize / 100f, 1f);
+    //     // dialogueBox.SetActive(false);
 
-    }
+    // }
+
+
 
     private void FixedUpdate() {
         DoTextEffects();
@@ -77,7 +117,12 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     /// Generates characters sprites from string and applies text effects
     /// </summary>
     /// <param name="textToGenerate"></param>
-    public void GenerateSpriteText(string textToGenerate) {
+    private void GenerateSpriteText(string textToGenerate) {
+        // GetComponentsInChildren<RectTransform>().ToList().ForEach(x => x.gameObject.SetActive(false));
+        // gameObject.SetActive(true);
+
+        gameObject.SetActiveAllChildren<RectTransform>(false);
+
         textToGenerate = textToGenerate.ToLower();
 
         if (letterObject == null) return;

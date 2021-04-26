@@ -25,7 +25,7 @@ public class AchievementSystem : MonoBehaviour {
 
             dialogueBox.SetActive(true);
 
-            SpriteLetterSystem.Instance.GenerateSpriteText($"unlocked: <c=(255,50,120)><w>{poi.PoiName}</w></c>");
+            SpriteLetterSystem.Instance.GenerateBigText($"unlocked: <c=(255,50,120)><w>{poi.PoiName}</w></c>");
             StartCoroutine(RemoveDialoguePanel());
         }
     }
