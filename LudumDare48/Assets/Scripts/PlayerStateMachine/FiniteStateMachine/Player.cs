@@ -156,11 +156,7 @@ public class Player : Singleton<Player>, IDamageable {
 
         HUD.Instance.SetHPHUD();
 
-        var scale = transform.localScale;
-        scale.x *= -1;
-        damageEffect.transform.localScale = scale;
-
-        damageEffect.GetComponent<ParticleSystem>().Play();
+        PlayDamageEffect();
 
         if (currentHealth <= 0) {
             Destroy(this.gameObject, 0.1f);
@@ -176,5 +172,13 @@ public class Player : Singleton<Player>, IDamageable {
         }
 
         if (oxygenCountDown >= 0) oxygenCountDown -= Time.deltaTime;
+    }
+
+    private void PlayDamageEffect() {
+        var scale = transform.localScale;
+        scale.x *= -1;
+        damageEffect.transform.localScale = scale;
+
+        damageEffect.GetComponent<ParticleSystem>().Play();
     }
 }

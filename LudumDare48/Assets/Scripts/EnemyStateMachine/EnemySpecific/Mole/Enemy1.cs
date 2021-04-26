@@ -21,6 +21,7 @@ public class Enemy1 : Entity, IDamageable {
     public E1_PlayerDetectedState playerDetectedState { get; private set; }
     public E1_ChargeState chargeState { get; private set; }
     public E1_LookForPlayerState lookForPlayerState { get; private set; }
+    public E1_DamagedState damagedState { get; private set; }
 
     [SerializeField] private SO_IdleState idleStateData;
     [SerializeField] private SO_MoveState moveStateData;
@@ -41,12 +42,16 @@ public class Enemy1 : Entity, IDamageable {
         playerDetectedState = new E1_PlayerDetectedState(this, StateMachine, "playerDetected", playerDetectedData, this);
         chargeState = new E1_ChargeState(this, StateMachine, "charge", chargeStateData, this);
         lookForPlayerState = new E1_LookForPlayerState(this, StateMachine, "lookForPlayer", lookForPlayerStateData, this);
+        damagedState = new E1_DamagedState(this, StateMachine, "damaged", this);
 
         playerDetectedState.SetWeapon(rockThrow);
 
         StateMachine.Initialize(idleState);
     }
     public void TakeDamage(float damage) {
+
+        PlayDamageEffect();
+        StateMachine.ChangeState(damagedState);
 
         currentHealth -= (int)damage;
 
@@ -57,6 +62,16 @@ public class Enemy1 : Entity, IDamageable {
         Debug.Log(EnemyName + " " + currentHealth);
 
         // Debug.Log(EnemyDelegateCount);
+    }
+
+    private void PlayDamageEffect() {
+        var damageEffect = ObjectPooler.Instance.SpawnFromPool("damageEffect", transform.position, Quaternion.identity);
+        var scale = transform.localScale;
+        scale.x *= -1;
+        damageEffect.transform.localScale = scale;
+        damageEffect.transform.position = AliveGO.transform.position;
+
+        damageEffect.GetComponent<ParticleSystem>().Play();
     }
 
     public override void OnDrawGizmos() {

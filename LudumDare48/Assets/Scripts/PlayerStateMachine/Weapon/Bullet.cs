@@ -42,6 +42,7 @@ public class Bullet : MonoBehaviour, IPooledObject {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.GetComponent<IIgnoreObject>()?.IgnoreMe() != null) return;
         other.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(Damage);
         gameObject.SetActive(false);
     }

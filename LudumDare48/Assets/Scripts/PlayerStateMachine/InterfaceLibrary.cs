@@ -5,3 +5,7 @@ public interface IDamageable {
 public interface IPooledObject {
     void OnObjectSpawn();
 }
+
+public interface IIgnoreObject {
+    bool IgnoreMe();
+}

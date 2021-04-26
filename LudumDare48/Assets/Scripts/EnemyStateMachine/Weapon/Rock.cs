@@ -41,6 +41,7 @@ public class Rock : MonoBehaviour, IPooledObject {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.GetComponent<IIgnoreObject>()?.IgnoreMe() != null) return;
         other.gameObject.GetComponent<IDamageable>()?.TakeDamage(Damage);
         Player.Instance.DamagedState.HitSide(transform.position.x > Player.Instance.transform.position.x);
         Player.Instance.DamagedState.SetHitForce(4, 5);

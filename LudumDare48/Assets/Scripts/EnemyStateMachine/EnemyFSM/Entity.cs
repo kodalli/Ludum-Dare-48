@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : Singleton<Entity> {
+public class Entity : MonoBehaviour {
 
     public EnemyStateMachine StateMachine;
     public SO_Entity entityData;

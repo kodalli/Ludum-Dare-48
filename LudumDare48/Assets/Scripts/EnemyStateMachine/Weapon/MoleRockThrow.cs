@@ -12,7 +12,8 @@ public class MoleRockThrow : MonoBehaviour {
         GameObject rock = ObjectPooler.Instance.SpawnFromPool("Rock", rockThrowPosition.position, Quaternion.identity);
         rock.GetComponent<Rock>().Damage = weaponData.rockDamage;
         rock.GetComponent<Rock>().Speed = weaponData.rockSpeed;
-        rock.GetComponent<Rock>().Direction = Entity.Instance.FacingDirection == 1 ? Vector2.right : Vector2.left;
+        Entity entity = GetComponentInParent<Entity>();
+        rock.GetComponent<Rock>().Direction = entity.FacingDirection == 1 ? Vector2.right : Vector2.left;
         rock.GetComponent<Rock>().DestroyDelay = weaponData.rockDestroyDelay;
         rock.GetComponent<Rock>().Shoot();
     }
