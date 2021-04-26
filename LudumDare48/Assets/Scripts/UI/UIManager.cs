@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public static class Helper {
     public static GameObject FindInChildren(this GameObject go, string name) {
@@ -17,15 +18,17 @@ public static class Helper {
         go.SetActive(true);
     }
 }
-public class UIManager : Singleton<UIManager> {
+public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExitHandler {
 
     // Main Game HUD
     private TextMeshProUGUI currentHPText;
     private TextMeshProUGUI currentOxygenText;
     private Image healthFill;
     private Image oxygenFill;
+    [SerializeField] private GameObject tooltip;
+    // [SerializeField] private TextMeshProUGUI tooltipText;
 
-
+    #region 
     private void Awake() {
         currentHPText = gameObject.FindInChildren("HUD_CURRENT_HP_TEXT").GetComponent<TextMeshProUGUI>();
         currentOxygenText = gameObject.FindInChildren("HUD_CURRENT_O2_TEXT").GetComponent<TextMeshProUGUI>();
@@ -48,5 +51,68 @@ public class UIManager : Singleton<UIManager> {
 
         currentOxygenText.text = Player.Instance.CurrentOxygen.ToString() + "%";
     }
+
+    #endregion
+
+    private void TryPurchase() {
+        string text;
+        if (LocalSave.Instance.saveData.gems > 1) {
+            text = "You can buy this!";
+        } else {
+            text = "Sorry, <c=(84, 161, 32)>Dingus</c>. I can't give <c=(235,122,52)>credit</c>. Come back when you're a little... <c=(235, 52, 208)><w>mmmmmmmmmmm</w></c> richer !";
+        }
+        SpriteLetterSystem.Instance.GenerateSmallText(text);
+    }
+
+
+    #region Onclick Button Functions
+
+    public void OnPayOffDebtClick() {
+        TryPurchase();
+        Debug.Log("debt");
+    }
+
+    public void OnUpgradeWeaponClick() {
+        TryPurchase();
+        Debug.Log("weapon");
+
+    }
+
+    public void OnBuyOxygenClick() {
+        TryPurchase();
+        Debug.Log("oxygen");
+    }
+
+    public void OnPayOffDebtHover() {
+        tooltip.SetActive(true);
+        var text = "pay off debt";
+        SpriteLetterSystem.Instance.GenerateSmallText(text);
+    }
+
+    public void OnUpgradeWeaponHover() {
+        tooltip.SetActive(true);
+        var text = "upgrade weapon";
+        SpriteLetterSystem.Instance.GenerateSmallText(text);
+
+    }
+
+    public void OnBuyOxygenHover() {
+        tooltip.SetActive(true);
+        var text = "buy oxygen";
+        SpriteLetterSystem.Instance.GenerateSmallText(text);
+    }
+    public void OnPointerEnter(PointerEventData eventData) {
+
+        // tooltip.GetComponent<RectTransform>().position = new Vector3(transform.position.x + ((tooltip.GetComponent<RectTransform>().sizeDelta.x / 2) + 100),
+        //     transform.position.y - ((tooltip.GetComponent<RectTransform>().sizeDelta.y / 2) + 100), 0);
+        // tooltip.GetComponent<RectTransform>().position = eventData.position;
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        tooltip.SetActive(false);
+    }
+
+
+    #endregion
 
 }

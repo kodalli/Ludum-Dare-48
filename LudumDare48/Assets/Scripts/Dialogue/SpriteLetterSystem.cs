@@ -60,7 +60,7 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
         lineSpacing = 70f;
         letterSize = 50f;
         indentLeft = 40f;
-        indentRight = 30f;
+        indentRight = 40f;
         indentTop = -60f;
         indentBottom = 0f;
         GenerateSpriteText(text);
