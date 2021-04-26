@@ -9,7 +9,7 @@ public class PointOfInterest : MonoBehaviour {
 
     [SerializeField] private string _poiName;
 
-    public string PoiName { get => uniqueID; }
+    public string PoiName { get => _poiName; }
 
     private string uniqueID = Guid.NewGuid().ToString("N");
 

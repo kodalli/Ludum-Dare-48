@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AchievementSystem : MonoBehaviour {
-    [SerializeField] private GameObject dialoguePanel;
 
 
     private void Start() {
@@ -23,13 +22,14 @@ public class AchievementSystem : MonoBehaviour {
             LocalSave.Instance.saveData.achievements.Add(achievementKey);
             Debug.Log("hashset " + string.Join("", LocalSave.Instance.saveData.achievements));
 
-            dialoguePanel.SetActive(true);
+            SpriteLetterSystem.Instance.DialogueBox.SetActive(true);
+
             SpriteLetterSystem.Instance.GenerateSpriteText($"unlocked: <c=(255,50,120)><w>{poi.PoiName}</w></c>");
             StartCoroutine(RemoveDialoguePanel());
         }
     }
     IEnumerator RemoveDialoguePanel() {
         yield return new WaitForSeconds(2f);
-        dialoguePanel.SetActive(false);
+        SpriteLetterSystem.Instance.DialogueBox.SetActive(false);
     }
 }

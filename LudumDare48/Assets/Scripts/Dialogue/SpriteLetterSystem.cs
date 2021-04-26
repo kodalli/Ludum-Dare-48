@@ -14,6 +14,7 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     [SerializeField] private GameObject letterObject;
     [SerializeField] private DialogueObject dObj;
     [SerializeField] private RectTransform dialogueBoxRT;
+    [SerializeField] private GameObject dialogueBox;
     // 
     [Header("Text Settings")]
     [SerializeField] private float letterSpacing = 3.5f;
@@ -23,6 +24,7 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
 
     public float LetterSize { set { letterSize = value; } }
     public float LetterSpacing { set { letterSpacing = value; } }
+    public GameObject DialogueBox { get => dialogueBox; }
 
     //
     [Header("Text Position In Dialogue Box")]
