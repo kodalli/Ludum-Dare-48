@@ -162,11 +162,6 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
             Destroy(this.gameObject, 0.1f);
         }
     }
-
-    public void OnCollector() {
-        LocalSave.Instance.saveData.gems++;
-    }
-
     private void ConsumeOxygen() {
 
         if (oxygenCountDown <= 0) {
@@ -184,5 +179,9 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
         damageEffect.transform.localScale = scale;
 
         damageEffect.GetComponent<ParticleSystem>().Play();
+    }
+
+    public void OnCollect() {
+        LocalSave.Instance.saveData.gems++;
     }
 }
