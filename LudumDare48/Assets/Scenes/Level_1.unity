@@ -34510,7 +34510,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1445630685, guid: 3488cc5a99e1d9e4bb4b22173f0d2e2c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2371979600662462539, guid: 3488cc5a99e1d9e4bb4b22173f0d2e2c, type: 3}
       propertyPath: m_IsActive
@@ -35451,70 +35451,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPooler
       objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[2].tag
-      value: damageEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[3].tag
-      value: shootEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[4].tag
-      value: OXYGEN
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[5].tag
-      value: GEM
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[6].tag
-      value: HEALTH
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[2].size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[3].size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[4].size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[5].size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[6].size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[2].prefab
-      value: 
-      objectReference: {fileID: 5965035547622757909, guid: 3a27ab0280b8169469f3f26b02521f85, type: 3}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[3].prefab
-      value: 
-      objectReference: {fileID: 201407418499862038, guid: d79fb53fc9b4c67428e030c94968f1e4, type: 3}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[4].prefab
-      value: 
-      objectReference: {fileID: 2694693218357320556, guid: 4062ab04586720c46b2b7c0ed1827a8f, type: 3}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[5].prefab
-      value: 
-      objectReference: {fileID: 6718107152761007258, guid: 45ab703524398c349902dfa08c014bb1, type: 3}
-    - target: {fileID: 9084759005293430858, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
-      propertyPath: pools.Array.data[6].prefab
-      value: 
-      objectReference: {fileID: 6485021173265096850, guid: 4e53eb1bf44fd104cb67d37eac2a3c68, type: 3}
     - target: {fileID: 9084759005293430859, guid: 5aa5657a573ab9a48833d1f15413c0ec, type: 3}
       propertyPath: m_RootOrder
       value: 2
