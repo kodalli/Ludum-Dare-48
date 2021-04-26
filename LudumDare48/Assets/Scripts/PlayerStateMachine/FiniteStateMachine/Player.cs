@@ -147,9 +147,6 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
     }
 
     public void TakeDamage(float damage) {
-
-        Debug.Log(damage);
-
         StateMachine.ChangeState(DamagedState);
 
         currentHealth -= (int)damage;
@@ -161,6 +158,7 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
         if (currentHealth <= 0) {
             Destroy(this.gameObject, 0.1f);
         }
+        Debug.Log(currentHealth);
     }
     private void ConsumeOxygen() {
 
