@@ -11,6 +11,7 @@ public class PlayerResources {
     public int gems; // trade in to pay off debt or purchase upgrade
     public int upgrades;
     public float debt;
+    public int gunLevel;
     public HashSet<string> achievements = new HashSet<string>();
 
     public void Start() {

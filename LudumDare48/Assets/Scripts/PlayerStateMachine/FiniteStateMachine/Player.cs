@@ -74,8 +74,8 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
         currentHealth = maxHealth;
         currentOxygen = maxOxygen;
 
-        HUD.Instance.SetHPHUD();
-        HUD.Instance.SetOxgyenHUD();
+        UIManager.Instance.SetHPHUD();
+        UIManager.Instance.SetOxgyenHUD();
 
 
         StateMachine.Initialize(IdleState);
@@ -139,7 +139,7 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
                 countDown = 1f / weapon.FireRate;
                 weapon.ShootBullet();
                 currentOxygen--;
-                HUD.Instance.SetOxgyenHUD();
+                UIManager.Instance.SetOxgyenHUD();
             }
         }
 
@@ -151,7 +151,7 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
 
         currentHealth -= (int)damage;
 
-        HUD.Instance.SetHPHUD();
+        UIManager.Instance.SetHPHUD();
 
         PlayDamageEffect();
 
@@ -165,7 +165,7 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
         if (oxygenCountDown <= 0) {
             oxygenCountDown = oxygenUsageRate;
             currentOxygen--;
-            HUD.Instance.SetOxgyenHUD();
+            UIManager.Instance.SetOxgyenHUD();
         }
 
         if (oxygenCountDown >= 0) oxygenCountDown -= Time.deltaTime;
