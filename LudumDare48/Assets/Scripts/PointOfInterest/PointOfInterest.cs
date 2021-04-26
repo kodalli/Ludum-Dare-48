@@ -17,10 +17,8 @@ public class PointOfInterest : MonoBehaviour {
         if (other.GetComponent<ICollector>()?.OnCollect() == null) {
             return;
         } else {
-            // Debug.Log("hi");
             if (OnPoiEntered != null) {
                 OnPoiEntered(this);
-                // gameObject.SetActive(false);
             }
         }
     }

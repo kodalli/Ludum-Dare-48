@@ -20,6 +20,8 @@ public static class Helper {
 }
 public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExitHandler {
 
+    private bool menuInput;
+
     // Main Game HUD
     private TextMeshProUGUI currentHPText;
     private TextMeshProUGUI currentOxygenText;
@@ -27,7 +29,7 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
     private Image healthFill;
     private Image oxygenFill;
     [SerializeField] private GameObject tooltip;
-    // [SerializeField] private TextMeshProUGUI tooltipText;
+    [SerializeField] private GameObject CreeditMenu_GO;
     private int upgradeCost = 1;
 
     #region 
@@ -37,6 +39,16 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
         healthFill = gameObject.FindInChildren("HUD_CURRENT_HEALTH_FILL").GetComponent<Image>();
         oxygenFill = gameObject.FindInChildren("HUD_CURRENT_O2_FILL").GetComponent<Image>();
         currentGemsText = gameObject.FindInChildren("HUD_CURRENT_GEMS_TEXT").GetComponent<TextMeshProUGUI>();
+    }
+    private void Update() {
+        menuInput = PlayerInputHandler.MenuInput;
+
+        EnableMenu();
+
+        // Debug.Log(menuInput);
+        // while (menuInput) {
+        //     CreeditMenu_GO.SetActive(true);
+        // }
     }
 
     public void SetHPHUD() {
@@ -77,13 +89,13 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
 
     public void OnPayOffDebtClick() {
         TryPurchase();
-        Debug.Log("debt");
+        Debug.Log("Paying off debt");
     }
 
     public void OnUpgradeWeaponClick() {
         TryPurchase();
         Debug.Log("weapon");
-
+        LocalSave.Instance.saveData.gunLevel++;
     }
 
     public void OnBuyOxygenClick() {
@@ -122,5 +134,13 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
 
 
     #endregion
+
+    public void EnableMenu() {
+        if (menuInput) {
+            CreeditMenu_GO.SetActive(true);
+        } else if (!menuInput) {
+            CreeditMenu_GO.SetActive(false);
+        }
+    }
 
 }

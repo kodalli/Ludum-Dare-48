@@ -22,6 +22,8 @@ public class PlayerInputHandler : MonoBehaviour {
 
     public bool[] AttackInputs { get; private set; }
 
+    public static bool MenuInput { get; private set; }
+
     private void Start() {
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
         AttackInputs = new bool[count];
@@ -44,6 +46,13 @@ public class PlayerInputHandler : MonoBehaviour {
         }
         if (context.canceled) {
             JumpInputStop = true;
+        }
+    }
+    public void OnMenuInput(InputAction.CallbackContext context) {
+        if (context.started && !MenuInput) {
+            MenuInput = true;
+        } else if ((context.started && MenuInput)) {
+            MenuInput = false;
         }
     }
     private void CheckJumpInputHoldTime() { if (Time.time >= jumpinputStartTime + inputHoldTime) JumpInput = false; }

@@ -18,7 +18,7 @@ public class Weapon : MonoBehaviour {
 
 
         GameObject bullet = ObjectPooler.Instance.SpawnFromPool("Bullet", bulletShootPosition.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().Damage = weaponData.bulletDamage;
+        bullet.GetComponent<Bullet>().Damage = weaponData.bulletDamage * LocalSave.Instance.saveData.gunLevel;
         bullet.GetComponent<Bullet>().Speed = weaponData.bulletSpeed;
         bullet.GetComponent<Bullet>().Direction = Player.Instance.FacingDirection == 1 ? Vector2.right : Vector2.left;
         bullet.GetComponent<Bullet>().DestroyDelay = weaponData.bulletDestroyDelay;
