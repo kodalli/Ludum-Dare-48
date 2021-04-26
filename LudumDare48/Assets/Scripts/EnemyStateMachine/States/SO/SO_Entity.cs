@@ -15,5 +15,6 @@ public class SO_Entity : ScriptableObject {
 
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
+    public float contactDamage = 5f;
 
 }

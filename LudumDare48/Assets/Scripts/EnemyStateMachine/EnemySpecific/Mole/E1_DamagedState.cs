@@ -19,7 +19,7 @@ public class E1_DamagedState : DamagedState {
     public override void LogicUpdate() {
         base.LogicUpdate();
         if (isAnimationFinished) {
-            stateMachine.ChangeState(enemy.idleState);
+            stateMachine.ChangeState(enemy.lookForPlayerState);
         }
         Timer();
         // Debug.Log(isAnimationFinished);

@@ -50,6 +50,7 @@ public class Enemy1 : Entity, IDamageable {
     }
     public void TakeDamage(float damage) {
 
+
         PlayDamageEffect();
         StateMachine.ChangeState(damagedState);
 
@@ -66,7 +67,7 @@ public class Enemy1 : Entity, IDamageable {
 
     private void PlayDamageEffect() {
         var damageEffect = ObjectPooler.Instance.SpawnFromPool("damageEffect", transform.position, Quaternion.identity);
-        var scale = transform.localScale;
+        var scale = AliveGO.transform.localScale;
         scale.x *= -1;
         damageEffect.transform.localScale = scale;
         damageEffect.transform.position = AliveGO.transform.position;

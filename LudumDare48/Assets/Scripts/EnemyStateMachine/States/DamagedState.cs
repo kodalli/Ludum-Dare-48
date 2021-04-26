@@ -22,7 +22,7 @@ public class DamagedState : EnemyState {
         base.Enter();
         isAnimationFinished = false;
         hitForceX = 4f;
-        hitForceY = 7f;
+        hitForceY = 5f;
         StartDamageAnimation();
     }
 
@@ -42,7 +42,7 @@ public class DamagedState : EnemyState {
             isTakingDamage = true;
             if (hitSideRight) hitForceX *= -1;
             entity.RB.drag = 0f;
-            entity.RB.velocity = Vector2.zero;
+            // entity.RB.velocity = Vector2.zero;
             entity.RB.AddForce(new Vector2(hitForceX, hitForceY), ForceMode2D.Impulse);
             // isAnimationFinished = true;
             Debug.Log(isAnimationFinished);
