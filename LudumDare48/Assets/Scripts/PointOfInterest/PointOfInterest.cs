@@ -14,7 +14,7 @@ public class PointOfInterest : MonoBehaviour {
     private string uniqueID = Guid.NewGuid().ToString("N");
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.GetComponent<ICollector>()?.OnCollect() == null) {
+        if (other.GetComponent<ICollector>()?.OnCollect(Item.DEFAULT) == null) {
             return;
         } else {
             if (OnPoiEntered != null) {

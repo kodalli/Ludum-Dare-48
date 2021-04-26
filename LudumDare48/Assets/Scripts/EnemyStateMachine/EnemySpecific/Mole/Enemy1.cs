@@ -63,7 +63,7 @@ public class Enemy1 : Entity, IDamageable {
 
         if (currentHealth <= 0) {
             if (enemyDelegate != null) enemyDelegate(this);
-
+            RandomDrop.SpawnRandomDrop(AliveGO.transform.position, Quaternion.identity);
             Destroy(this.gameObject, 0.1f);
         }
         Debug.Log(EnemyName + " " + currentHealth);

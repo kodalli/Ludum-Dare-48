@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GemCollected : MonoBehaviour {
-    [SerializeField] private float animationLength;
+public class ItemCollectedAnimation : MonoBehaviour {
+    [SerializeField] private float animationLength = 1f;
+    [SerializeField] private Item item;
     private SpriteRenderer sp;
 
     IEnumerator Collection() {
@@ -21,11 +22,12 @@ public class GemCollected : MonoBehaviour {
 
             yield return default;
         }
-        Destroy(this.gameObject);
+        // Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.GetComponent<ICollector>()?.OnCollect() != null) {
+        if (other.GetComponent<ICollector>()?.OnCollect(item) != null) {
             sp = GetComponent<SpriteRenderer>();
             StartCoroutine(Collection());
         }

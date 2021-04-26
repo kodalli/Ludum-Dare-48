@@ -196,8 +196,14 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
         damageEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public bool OnCollect() {
-        Player.Instance.CurrentGems++;
+    public bool OnCollect(Item item) {
+        switch (item) {
+            case Item.GEM: Player.Instance.CurrentGems++; break;
+            case Item.HEALTH: Player.Instance.currentHealth += 5; break;
+            case Item.OXYGEN: Player.Instance.currentOxygen += 5; break;
+            default: break;
+        }
+
         return true;
     }
 

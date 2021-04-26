@@ -61,6 +61,7 @@ public class ShroomController : MonoBehaviour, IDamageable {
         CinemachineShake.Instance.ShakeCamera(3f, 0.2f);
         health -= (int)damage;
         if (health <= 0) {
+            RandomDrop.SpawnRandomDrop(transform.position, Quaternion.identity);
             Destroy(this.gameObject, 0.1f);
         }
         rb.AddForce(hitForce, ForceMode2D.Impulse);
@@ -87,6 +88,7 @@ public class ShroomController : MonoBehaviour, IDamageable {
         rb.AddForce(hitForce, ForceMode2D.Impulse);
 
         if (health <= 0) {
+            RandomDrop.SpawnRandomDrop(transform.position, Quaternion.identity);
             Destroy(this.gameObject, 0.1f);
         }
         Debug.Log(health);
