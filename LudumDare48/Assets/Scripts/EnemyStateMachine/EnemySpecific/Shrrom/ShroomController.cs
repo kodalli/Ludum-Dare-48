@@ -79,6 +79,8 @@ public class ShroomController : MonoBehaviour, IDamageable {
     }
 
     public void TakeDamage(float damage, bool hitFromRight) {
+        PlayDamageEffect();
+
         health -= (int)damage;
 
         hitForce.x *= hitFromRight ? -1 : 1;
@@ -92,5 +94,15 @@ public class ShroomController : MonoBehaviour, IDamageable {
             Destroy(this.gameObject, 0.1f);
         }
         Debug.Log(health);
+    }
+    private void PlayDamageEffect() {
+        CinemachineShake.Instance.ShakeCamera(3f, 0.2f);
+        var damageEffect = ObjectPooler.Instance.SpawnFromPool("damageEffect", transform.position, Quaternion.identity);
+        var scale = transform.localScale;
+        scale.x *= -1;
+        damageEffect.transform.localScale = scale;
+        damageEffect.transform.position = transform.position;
+
+        damageEffect.GetComponent<ParticleSystem>().Play();
     }
 }

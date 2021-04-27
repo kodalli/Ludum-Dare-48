@@ -56,7 +56,7 @@ public class PlayerInputHandler : Singleton<PlayerInputHandler> {
     public void OnMenuInput(InputAction.CallbackContext context) {
         if (context.started && !MenuInput) {
             MenuInput = true;
-            startgametext.SetActive(false);
+            // startgametext.SetActive(false);
         } else if ((context.started && MenuInput)) {
             MenuInput = false;
         }

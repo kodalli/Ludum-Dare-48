@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 
 //Attatch this to something, ideally something in a unity canvas
-public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
+public class SpriteLetterSystem : MonoBehaviour {
     private enum TextEffect { None, Wavy, Shaky }
 
     #region Variables
@@ -116,7 +116,6 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     /// <summary>
     /// Generates characters sprites from string and applies text effects
     /// </summary>
-    /// <param name="textToGenerate"></param>
     private void GenerateSpriteText(string textToGenerate) {
         // GetComponentsInChildren<RectTransform>().ToList().ForEach(x => x.gameObject.SetActive(false));
         // gameObject.SetActive(true);
@@ -222,11 +221,6 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     /// <summary>
     /// Creates new letter sprite and displays on canvas
     /// </summary>
-    /// <param name="newCharacter"></param>
-    /// <param name="positionX"></param>
-    /// <param name="positionY"></param>
-    /// <param name="letterNumber"></param>
-    /// <returns></returns>
     private GameObject CreateNewLetter(CharData newCharacter, float positionX, float positionY, int letterNumber) {
 
         //Create new game object
@@ -243,10 +237,6 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     /// <summary>
     /// Applies tag effects and checks if current char is in tagged element
     /// </summary>
-    /// <param name="fullText"></param>
-    /// <param name="c"></param>
-    /// <param name="j"></param>
-    /// <param name="inTag"></param>
     private void CheckTag(string fullText, char c, int j, ref bool inTag) {
         if (c == '<') {
             inTag = true;
@@ -271,8 +261,6 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
     /// <summary>
     /// Sets active color to value specified in element tag
     /// </summary>
-    /// <param name="fullText"></param>
-    /// <param name="start"></param>
     private void SetColorFromText(string fullText, int start) {
         // c=( 256, 256, 256)
 
@@ -322,34 +310,4 @@ public class SpriteLetterSystem : Singleton<SpriteLetterSystem> {
         }
     }
 
-    // public List<Image> imageList = new List<Image>();
-
-    // private void OnDrawGizmos()
-    // {
-    //     var min = Vector3.positiveInfinity;
-    //     var max = Vector3.negativeInfinity;
-
-    //     foreach (var image in imageList)
-    //     {
-    //         if(!image) continue;
-
-    //         // Get the 4 corners in world coordinates
-    //         var v = new Vector3[4];
-    //         image.rectTransform.GetWorldCorners(v);
-
-    //         // update min and max
-    //         foreach (var vector3 in v)
-    //         {
-    //             min = Vector3.Min(min, vector3);
-    //             max = Vector3.Max(max, vector3);
-    //         }
-    //     }
-
-    //     // create the bounds
-    //     var bounds = new Bounds();
-    //     bounds.SetMinMax(min, max);
-
-    //     Gizmos.color = Color.red;
-    //     Gizmos.DrawWireCube(bounds.center, bounds.size);
-    // }
 }

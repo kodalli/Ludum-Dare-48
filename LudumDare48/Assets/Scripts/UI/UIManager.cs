@@ -30,6 +30,7 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
     private Image oxygenFill;
     [SerializeField] private GameObject tooltip;
     [SerializeField] private GameObject CreeditMenu_GO;
+    private SpriteLetterSystem SPL;
 
     private int upgradeCost = 1;
 
@@ -40,6 +41,7 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
         healthFill = gameObject.FindInChildren("HUD_CURRENT_HEALTH_FILL").GetComponent<Image>();
         oxygenFill = gameObject.FindInChildren("HUD_CURRENT_O2_FILL").GetComponent<Image>();
         currentGemsText = gameObject.FindInChildren("HUD_CURRENT_GEMS_TEXT").GetComponent<TextMeshProUGUI>();
+        SPL = tooltip.GetComponentInChildren<SpriteLetterSystem>();
     }
     private void Update() {
         menuInput = PlayerInputHandler.MenuInput;
@@ -70,9 +72,9 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
             text = "Purchase sucessful ! However, your debt continues to grow.";
             Player.Instance.CurrentGems -= upgradeCost;
         } else {
-            text = "Sorry, <c=(84, 161, 32)>Dingus</c>. I can't give <c=(235,122,52)>credit</c>. Come back when you're a little... <c=(235, 52, 208)><w>mmmmmmmmmmm</w></c> richer !";
+            text = "Sorry, <c=(84, 161, 32)>Deeto</c>. I can't give <c=(235,122,52)>credit</c>. Come back when you're a little... <c=(235, 52, 208)><w>mmmmmmmmmmm</w></c> richer !";
         }
-        SpriteLetterSystem.Instance.GenerateSmallText(text);
+        SPL.GenerateSmallText(text);
     }
 
 
@@ -100,20 +102,20 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
     public void OnPayOffDebtHover() {
         tooltip.SetActive(true);
         var text = "pay off debt";
-        SpriteLetterSystem.Instance.GenerateSmallText(text);
+        SPL.GenerateSmallText(text);
     }
 
     public void OnUpgradeWeaponHover() {
         tooltip.SetActive(true);
         var text = "upgrade weapon";
-        SpriteLetterSystem.Instance.GenerateSmallText(text);
+        SPL.GenerateSmallText(text);
 
     }
 
     public void OnBuyOxygenHover() {
         tooltip.SetActive(true);
         var text = "buy oxygen";
-        SpriteLetterSystem.Instance.GenerateSmallText(text);
+        SPL.GenerateSmallText(text);
     }
     public void OnPointerEnter(PointerEventData eventData) {
 

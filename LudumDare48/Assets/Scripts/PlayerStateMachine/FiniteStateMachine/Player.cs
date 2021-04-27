@@ -178,7 +178,7 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
 
         PlayDamageEffect();
 
-        if (CurrentHP <= 0) { Destroy(this.gameObject, 0.1f); }
+        if (CurrentHP <= 0) { gameObject.SetActive(false); }
     }
     private void ConsumeOxygen() {
 
@@ -216,6 +216,6 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
     }
 
     public void TakeDamage(float damage, bool hitFromRight) {
-        throw new System.NotImplementedException();
+        TakeDamage(damage);
     }
 }
