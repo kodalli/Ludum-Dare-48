@@ -23,6 +23,7 @@ public class PlayerInputHandler : MonoBehaviour {
     public bool[] AttackInputs { get; private set; }
 
     public static bool MenuInput { get; private set; }
+    public GameObject startgametext;
 
     private void Start() {
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
@@ -51,6 +52,7 @@ public class PlayerInputHandler : MonoBehaviour {
     public void OnMenuInput(InputAction.CallbackContext context) {
         if (context.started && !MenuInput) {
             MenuInput = true;
+            startgametext.SetActive(false);
         } else if ((context.started && MenuInput)) {
             MenuInput = false;
         }
