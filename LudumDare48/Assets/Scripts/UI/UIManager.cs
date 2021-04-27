@@ -48,17 +48,13 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
 
     public void SetHPHUD() {
         float ratio = Player.Instance.CurrentHP / Player.Instance.MaxHP;
-        // healthFill.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, originalSizeHealth * ratio);
         healthFill.fillAmount = ratio;
         currentHPText.text = Player.Instance.CurrentHP.ToString() + "%";
     }
 
     public void SetOxgyenHUD() {
-
         float ratio = Player.Instance.CurrentOxygen / Player.Instance.MaxOxygen;
-        // oxygenFill.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, originalSizeOxygen * ratio);
         oxygenFill.fillAmount = ratio;
-
         currentOxygenText.text = Player.Instance.CurrentOxygen.ToString() + "%";
     }
 
@@ -95,6 +91,9 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
 
     public void OnBuyOxygenClick() {
         TryPurchase();
+
+        Player.Instance.CurrentOxygen += 30;
+
         Debug.Log("oxygen");
     }
 

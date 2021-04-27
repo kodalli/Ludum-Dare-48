@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Player : Singleton<Player>, IDamageable, ICollector {
 
-    [SerializeField] private float currentHealth;
-    [SerializeField] private float maxHealth;
-    [SerializeField] private float currentOxygen;
-    [SerializeField] private float maxOxygen;
-    [SerializeField] private float oxygenUsageRate;
-    [SerializeField] private GameObject damageEffect;
 
     #region State Variables 
     public PlayerStateMachine StateMachine { get; private set; }
@@ -40,14 +34,27 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
 
     #endregion
 
-    #region Other Variables
-    private Vector2 previousVelocity;
+    #region Main Player Variables
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float maxOxygen;
     public Vector2 CurrentVelocity { get; private set; }
     public int FacingDirection { get; private set; }
     public float MaxHP { get => maxHealth; }
     public float MaxOxygen { get => maxOxygen; }
-    public float CurrentHP { get => currentHealth; }
-    public float CurrentOxygen { get => currentOxygen; }
+    public float CurrentHP {
+        get => LocalSave.Instance.saveData.health;
+        set {
+            LocalSave.Instance.saveData.health = value;
+            UIManager.Instance.SetHPHUD();
+        }
+    }
+    public float CurrentOxygen {
+        get => LocalSave.Instance.saveData.oxygen;
+        set {
+            LocalSave.Instance.saveData.oxygen = value;
+            UIManager.Instance.SetOxgyenHUD();
+        }
+    }
     public int CurrentGems {
         get => LocalSave.Instance.saveData.gems;
         set {
@@ -55,8 +62,23 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
             UIManager.Instance.SetGemsHUD();
         }
     }
+    public int PlayerGunLevel {
+        get => LocalSave.Instance.saveData.gunLevel;
+        set {
+            LocalSave.Instance.saveData.gunLevel = value;
+
+        }
+    }
+
+    #endregion
+
+    #region Other Variables
+    private Vector2 previousVelocity;
+    private float oxygenUsageRate = 5f;
+    private GameObject damageEffect;
     private float countDown;
     private float oxygenCountDown;
+
     #endregion
 
     #region Unity Callback Functions
@@ -69,6 +91,8 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
         InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
         DamagedState = new PlayerDamagedState(this, StateMachine, playerData, "damaged");
+
+        damageEffect = gameObject.FindInChildren("damageEffect");
     }
     private void Start() {
         Anim = GetComponent<Animator>();
@@ -78,20 +102,12 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
 
         FacingDirection = 1;
 
-        currentHealth = maxHealth;
-        currentOxygen = maxOxygen;
-
-        UIManager.Instance.SetHPHUD();
-        UIManager.Instance.SetOxgyenHUD();
-        UIManager.Instance.SetGemsHUD();
-
+        // CurrentHP = maxHealth = 100f;
+        // CurrentOxygen = maxOxygen = 100f;
 
         StateMachine.Initialize(IdleState);
     }
     private void Update() {
-
-        LocalSave.Instance.saveData.oxygen = currentOxygen;
-        LocalSave.Instance.saveData.health = currentHealth;
 
         ConsumeOxygen();
 
@@ -142,13 +158,11 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
 
     private void Shoot() {
         if (InputHandler.AttackInputs[(int)CombatInputs.PRIMARY]) {
-            // stateMachine.ChangeState(player.PrimaryAttackState);
             if (countDown <= 0) {
                 countDown = 1f / weapon.FireRate;
-                if (currentOxygen > 0f) {
+                if (CurrentOxygen > 0f) {
                     weapon.ShootBullet();
-                    currentOxygen--;
-                    UIManager.Instance.SetOxgyenHUD();
+                    CurrentOxygen--;
                 }
             }
         }
@@ -157,29 +171,23 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
     }
 
     public void TakeDamage(float damage) {
+
         StateMachine.ChangeState(DamagedState);
 
-        currentHealth -= (int)damage;
-
-        UIManager.Instance.SetHPHUD();
+        CurrentHP -= (int)damage;
 
         PlayDamageEffect();
 
-        if (currentHealth <= 0) {
-            Destroy(this.gameObject, 0.1f);
-        }
-        Debug.Log(currentHealth);
+        if (CurrentHP <= 0) { Destroy(this.gameObject, 0.1f); }
     }
     private void ConsumeOxygen() {
 
         if (oxygenCountDown <= 0) {
             oxygenCountDown = oxygenUsageRate;
-            if (currentOxygen > 0f) {
-                currentOxygen--;
-                UIManager.Instance.SetOxgyenHUD();
+            if (CurrentOxygen > 0f) {
+                CurrentOxygen--;
             } else {
-                currentHealth--;
-                UIManager.Instance.SetHPHUD();
+                CurrentOxygen--;
             }
         }
 
@@ -198,12 +206,12 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
 
     public bool OnCollect(Item item) {
         switch (item) {
-            case Item.GEM: Player.Instance.CurrentGems++; break;
-            case Item.HEALTH: Player.Instance.currentHealth += 5; break;
-            case Item.OXYGEN: Player.Instance.currentOxygen += 5; break;
+            case Item.GEM: CurrentGems++; break;
+            case Item.HEALTH: CurrentHP += 5; break;
+            case Item.OXYGEN: CurrentOxygen += 5; break;
             default: break;
-        }
 
+        }
         return true;
     }
 

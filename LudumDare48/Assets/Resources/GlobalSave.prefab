@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveData:
-    oxygen: 0
-    gems: 0
+    oxygen: 100
+    health: 100
+    gems: 5
     upgrades: 0
     debt: 0
+    gunLevel: 1
