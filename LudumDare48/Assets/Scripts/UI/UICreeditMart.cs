@@ -20,7 +20,7 @@ public class UICreeditMart : MonoBehaviour {
         "My name is <c=(65,105,225)>Creedit</c> and I'm here to tell you that you are in deep shit",
         "Because you have not yet paid me my due, I have trapped you in this cave ...",
         "You have <c=(34,139,34)>$5000</c> in lost debt payments to owe me ...",
-        "Collect me at least 5 of the <c=(128,0,128)>purple gems</c> and we can settle this ...",
+        "Collect me at least 10 of the <c=(128,0,128)>purple gems</c> and we can settle this ...",
         "Good luck <c=(0,100,0)>Deeto</c> ... ",
         "Or else ...",
         "Press M to start the game",
