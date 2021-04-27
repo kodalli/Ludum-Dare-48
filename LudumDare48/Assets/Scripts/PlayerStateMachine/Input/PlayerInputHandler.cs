@@ -8,7 +8,10 @@ using UnityEngine.InputSystem;
 public enum CombatInputs {
     PRIMARY,
 }
-public class PlayerInputHandler : MonoBehaviour {
+public class PlayerInputHandler : Singleton<PlayerInputHandler> {
+
+    private PlayerInput playerInput;
+
 
     public Vector2 RawMovementInput { get; private set; }
     public int NormInputX { get; private set; }
@@ -27,6 +30,7 @@ public class PlayerInputHandler : MonoBehaviour {
     private void Start() {
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
         AttackInputs = new bool[count];
+        playerInput = GetComponent<PlayerInput>();
     }
     private void Update() {
         CheckJumpInputHoldTime();
