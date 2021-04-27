@@ -15,7 +15,8 @@ public class UICreeditMart : MonoBehaviour {
     private float totalTime = 3f;
     private float timeRemaining = 3f;
     private bool textTrigger;
-
+    private int dialogueLength;
+    private int dialogueCount = 0;
     private string[] creeditDialogue = {
         "My name is <c=(65,105,225)>Creedit</c> and I'm here to tell you that you are in deep shit",
         "Because you have not yet paid me my due, I have trapped you in this cave ...",
@@ -26,8 +27,6 @@ public class UICreeditMart : MonoBehaviour {
         "Press M to start the game",
     };
 
-    private int dialogueLength;
-    private int dialogueCount = 0;
 
 
     private void Awake() {
