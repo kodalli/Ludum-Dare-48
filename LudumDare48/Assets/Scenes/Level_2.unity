@@ -64617,7 +64617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8772557399005647759, guid: cd984341266ea294392176bd66794387, type: 3}
       propertyPath: saveData.gunLevel
-      value: 1000
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd984341266ea294392176bd66794387, type: 3}
