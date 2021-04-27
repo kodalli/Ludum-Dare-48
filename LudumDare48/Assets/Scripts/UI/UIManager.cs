@@ -30,6 +30,7 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
     private Image oxygenFill;
     [SerializeField] private GameObject tooltip;
     [SerializeField] private GameObject CreeditMenu_GO;
+
     private int upgradeCost = 1;
 
     #region 
@@ -42,13 +43,7 @@ public class UIManager : Singleton<UIManager>, IPointerEnterHandler, IPointerExi
     }
     private void Update() {
         menuInput = PlayerInputHandler.MenuInput;
-
         EnableMenu();
-
-        // Debug.Log(menuInput);
-        // while (menuInput) {
-        //     CreeditMenu_GO.SetActive(true);
-        // }
     }
 
     public void SetHPHUD() {
