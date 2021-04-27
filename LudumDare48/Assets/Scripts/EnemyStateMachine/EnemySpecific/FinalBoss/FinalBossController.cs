@@ -173,8 +173,9 @@ public class FinalBossController : Singleton<FinalBossController>, IDamageable {
     }
 
     public void TakeDamage(float damage) {
-        Debug.Log("take damage calleed");
-        throw new System.NotImplementedException();
+        // Debug.Log("take damage calleed");
+        // TakeDamage(damage, false);
+        // throw new System.NotImplementedException();
     }
 
     void OnDrawGizmos() {

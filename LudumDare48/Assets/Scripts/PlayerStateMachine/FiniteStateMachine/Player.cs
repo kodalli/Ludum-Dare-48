@@ -166,7 +166,8 @@ public class Player : Singleton<Player>, IDamageable, ICollector {
         PlayDamageEffect();
 
         if (currentHealth <= 0) {
-            Destroy(this.gameObject, 0.1f);
+            // Destroy(this.gameObject, 0.1f);
+            gameObject.SetActive(false);
         }
         Debug.Log(currentHealth);
     }
